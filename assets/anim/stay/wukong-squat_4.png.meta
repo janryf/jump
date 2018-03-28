@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "d0431e7c-1932-45f8-a3c2-6cd102212f3c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "wukong-squat_4": {
+      "ver": "1.0.3",
+      "uuid": "74d93566-6eb6-4de2-837d-5e7aefe0e7f8",
+      "rawTextureUuid": "d0431e7c-1932-45f8-a3c2-6cd102212f3c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -12.5,
+      "trimX": 6,
+      "trimY": 27,
+      "width": 110,
+      "height": 129,
+      "rawWidth": 122,
+      "rawHeight": 158,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

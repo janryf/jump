@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "42659940-7a69-4d86-a5ab-b1570fb53a86",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "wukong-fall_4": {
+      "ver": "1.0.3",
+      "uuid": "af654e9f-82bf-4547-9a06-b692e31fe991",
+      "rawTextureUuid": "42659940-7a69-4d86-a5ab-b1570fb53a86",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -2,
+      "offsetY": -1.5,
+      "trimX": 0,
+      "trimY": 3,
+      "width": 103,
+      "height": 143,
+      "rawWidth": 107,
+      "rawHeight": 146,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
