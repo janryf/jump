@@ -51,7 +51,7 @@ export function leaveState(gameManager, state)
 {
     if(state == STATE_NORMAL)
     {
-
+        gameManager.showSpeedLine(false)
     }
     else if(state == STATE_PAUSE)
     {

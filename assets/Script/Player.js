@@ -109,6 +109,8 @@ cc.Class({
         this.node.y = crashDown - 1
         this.vVert *= 0.1
         this.vVert *= -1
+        this.getComponent(cc.Animation).play('animFall')
+        this.gameManager.showSpeedLine(false)
     },
 
     left(crashLeft)
@@ -137,7 +139,10 @@ cc.Class({
                 this.getComponent(cc.Animation).play('animJump')
                 cc.audioEngine.playEffect(this.jumpAudio, false);
                 if(this.vVert >= _maxSpeed / 2)
+                {
                     this.rushNode.active = true
+                    this.gameManager.showSpeedLine(true)
+                }
                 cc.log('反弹时的速度值' + this.vVert)
             }
             return
@@ -162,7 +167,10 @@ cc.Class({
         //cc.log("速度" + this.vVert)
         if(orgVVert > 0 && this.vVert <= 0)
             if(!this.gameManager.getCurState != State.STATE_STAY)
+            {
                 this.getComponent(cc.Animation).play('animFall')
+                this.gameManager.showSpeedLine(false)
+            }
 
         if(this.gameManager.logicSpeed <= 0)
            this.node.y += sVert

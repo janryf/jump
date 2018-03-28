@@ -54,6 +54,11 @@ cc.Class({
             default : null,
             type : cc.Node,
         },
+
+        speedLineNode : {
+            default : null,
+            type : cc.Node,
+        },
         
         buttonRestart:{
             default : null,
@@ -96,6 +101,14 @@ cc.Class({
         this.curState = -1
     },
 
+    showSpeedLine(bPlay)
+    {
+        if(bPlay)
+            this.speedLineNode.active = true
+        else
+        this.speedLineNode.active = false
+    },
+
     start () 
     {
         this.scoreNode.getComponent(cc.Label).string = 0
@@ -104,6 +117,7 @@ cc.Class({
 
         this.buttonRestart.on('touchstart', this.restart.bind(this))
         this.buttonRestart.active = false
+        this.speedLineNode.active = false
         this.score = 0
         this.enemyTimeout = 2
         this.enterState(State.STATE_MAIN_MENU)
