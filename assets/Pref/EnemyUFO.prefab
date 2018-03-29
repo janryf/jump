@@ -75,7 +75,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "e005cfdd-e16e-4e73-a41c-335bfdfb37cc"
+      "__uuid__": "990cd51d-1f45-4464-8bd1-ea437b7ecf95"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -110,11 +110,11 @@
     },
     "_enabled": true,
     "_defaultClip": {
-      "__uuid__": "6dc5fe97-e0d9-41ce-9a14-6ca21e623aff"
+      "__uuid__": "57736e8a-e6b5-45eb-8737-4b2dc1484b9b"
     },
     "_clips": [
       {
-        "__uuid__": "6dc5fe97-e0d9-41ce-9a14-6ca21e623aff"
+        "__uuid__": "57736e8a-e6b5-45eb-8737-4b2dc1484b9b"
       }
     ],
     "playOnLoad": true
