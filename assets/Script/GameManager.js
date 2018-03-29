@@ -104,7 +104,7 @@ cc.Class({
     showSpeedLine(bPlay)
     {
         if(bPlay)
-            this.speedLineNode.active = true
+            this.speedLineNode.active = false
         else
         this.speedLineNode.active = false
     },
