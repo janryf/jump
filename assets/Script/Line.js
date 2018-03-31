@@ -64,7 +64,7 @@ cc.Class({
 
         //cc.log(playerNode.x + "主角位置" + left + " " + right + " " + top + " " + down)
 
-        for(i = 0; i <= 4; i++)
+        for(var i = 0; i <= 4; i++)
         {
             var x = this.node.x + this.node.width * Math.cos(angle) * i / 4
             var y = this.node.y - this.node.width * Math.sin(angle) * i / 4

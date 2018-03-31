@@ -130,7 +130,7 @@ cc.Class({
         player.restart()
         this.score = 0
         this.scoreNode.getComponent(cc.Label).string = 0
-        for(i = 0; i < this.enemys.length; i++)
+        for(var i = 0; i < this.enemys.length; i++)
             this.enemys[i].destroy()
         this.enemys = []
     },
@@ -157,6 +157,14 @@ cc.Class({
         return this.lineNode
     },
 
+    clearCrashFlag()
+    {
+        for(var i = 0; i < this.enemys.length; i++)
+        {
+            this.enemys[i].getComponent('Enemy').crashFlag = false
+        }
+    },
+
     randomFrom(lowerValue, upperValue)
     {
         return Math.floor(Math.random() * (upperValue - lowerValue + 1) + lowerValue);
@@ -175,7 +183,7 @@ cc.Class({
             {
                 this.enemyTimeout = 2
                 var enemyGroup = SpawnData.getEnemy(this.score)
-                for(i = 0; i < enemyGroup.length; i++)
+                for(var i = 0; i < enemyGroup.length; i++)
                 {
                     var enemyInfo = enemyGroup[i]
                     var enemy = null
@@ -199,14 +207,17 @@ cc.Class({
         if(this.background2.y < -(this.node.getParent().height) / 2)
             this.background2.y += this.background2.height * 2
         
+        if(this.curState != State.STATE_NORMAL)
+            return//只在normal状态下检测主角跟绳子和障碍物的碰撞
+
         //检测主角跟反弹线的碰撞
         if(this.lineNode != null)
         {
             var line = this.lineNode.getComponent('Line')
             if(line.actived && line.crashDetect(this.playerNode))//发生碰撞以后，首先播放绳子的动画
             {
-                this.add = 0
                 line.actived = false
+                this.clearCrashFlag()
                 this.lineNode.getComponent(cc.Animation).play('animBend')
                 this.lineNode.height = 25
                 this.lineNode.y -= 10
@@ -230,7 +241,7 @@ cc.Class({
         }
 
         //检测主角跟障碍物的碰撞
-        for(i = 0; i < this.enemys.length; i++)
+        for(var i = 0; i < this.enemys.length; i++)
             if(this.enemys[i].y < -this.node.getParent().height)
             {
                 this.enemys[i].destroy()
@@ -239,9 +250,11 @@ cc.Class({
                 break
             }
 
-        for(i = 0; i < this.enemys.length; i++)
+        for(var i = 0; i < this.enemys.length; i++)
         {
             var player = this.playerNode.getComponent('Player')
+            if(this.enemys[i].getComponent('Enemy').crashFlag)
+                continue
 
             //cc.log('检测碰撞' + player.node.x + " " + player.node.y)
             var ret = this.enemys[i].getComponent('Enemy').checkCrash(this.playerNode.getComponent('Player'))
@@ -249,21 +262,28 @@ cc.Class({
             {
                 this.enterState(State.STATE_PREPAIR_DEAD)
             }
-            else if(ret.result == 1)//向上
+            else if(ret.result == -1)
+                continue
+            else
             {
-                player.up(ret.top)
-            }
-            else if(ret.result == 2)//向右
-            {
-                player.right(ret.right)
-            }
-            else if(ret.result == 3)//向下
-            {
-                player.down(ret.down)
-            }
-            else if(ret.result == 4)//向左
-            {
-                player.left(ret.left)
+                this.clearCrashFlag()
+                this.enemys[i].getComponent('Enemy').crashFlag = true
+                if(ret.result == 1)//向上
+                {
+                    player.up(ret.top)
+                }
+                else if(ret.result == 2)//向右
+                {
+                    player.right(ret.right)
+                }
+                else if(ret.result == 3)//向下
+                {
+                    player.down(ret.down)
+                }
+                else if(ret.result == 4)//向左
+                {
+                    player.left(ret.left)
+                }
             }
         }
     },

@@ -36,6 +36,7 @@ cc.Class({
     hSpeed : 0,
     time : 0,
     timeout : 0,
+    crashFlag : false,
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -45,6 +46,7 @@ cc.Class({
         this.timeout = 0
         this.orgX = 0
         this.orgY = 0
+        this.crashFlag = false
     },
 
     setEnemyData(gameManager, x, y, vSpeed, hSpeed)

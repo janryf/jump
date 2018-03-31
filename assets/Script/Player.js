@@ -210,9 +210,15 @@ cc.Class({
         var sHorz = this.vHorz * dt
 
         this.node.x += sHorz
-        if(this.node.x < -screenWidth / 2)
+        if(this.node.x < -screenWidth / 2)//碰了左边的墙
+        {
+            this.gameManager.clearCrashFlag()
             this.right(-screenWidth / 2)
-        else if(this.node.x > screenWidth / 2 - this.node.width * this.node.scaleX)
+        }
+        else if(this.node.x > screenWidth / 2 - this.node.width * this.node.scaleX)//碰了右边的墙
+        {
+            this.gameManager.clearCrashFlag()
             this.left(screenWidth / 2)
+        }
     },  
 });

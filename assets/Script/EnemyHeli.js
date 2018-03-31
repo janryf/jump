@@ -92,6 +92,6 @@ cc.Class({
                 return {result:ret, top:top2, right:right2, down:down2, left:left2}
             }
         }
-        return -1
+        return {result:-1}
     },
 });
