@@ -49,7 +49,15 @@ cc.Class({
         beginChangeBK : false,
 
         //--------- ui ------------
+        scoreBg : {
+            default : null,
+            type : cc.Node,
+        },
         scoreNode : {
+            default : null,
+            type : cc.Node,
+        },
+        overScoreBg : {
             default : null,
             type : cc.Node,
         },
@@ -75,9 +83,33 @@ cc.Class({
         },//-------------------------
 
         //----------- prefab --------------
-        backgroundAudio: {
+        audioBk: {
             default: null,
             url: cc.AudioClip
+        },
+        audioCrash: {
+            default: null,
+            url: cc.AudioClip
+        },
+        audioGameover: {
+            default: null,
+            url: cc.AudioClip
+        },
+        audioJump: {
+            default: null,
+            url: cc.AudioClip
+        },
+        audioPerfect: {
+            default: null,
+            url: cc.AudioClip
+        },
+        audioDead: {
+            default: null,
+            url: cc.AudioClip
+        },
+        effectCrash:{
+            default: null,
+            type : cc.Prefab,
         },
         stickBend : {
             default : null,
@@ -121,6 +153,8 @@ cc.Class({
     enemyTimeout : 0,// 
     curState : 0, 
     wechat : 0,
+    bkMusic : 0,
+    bPlayMusic : 0,
 
     setLogicSpeed(logicSpeed)
     {
@@ -131,6 +165,7 @@ cc.Class({
     {
         this.curState = -1
         this.wechat = 0
+        this.bPlayMusic = true
     },
 
     showSpeedLine(bPlay)
@@ -145,6 +180,7 @@ cc.Class({
     {
         this.scoreNode.getComponent(cc.Label).string = 0
         this.overScoreNode.active = false
+        this.overScoreBg.active = false
         //cc.audioEngine.playEffect(this.backgroundAudio, true);
 
         this.buttonRestart.on('touchstart', this.restart.bind(this))
@@ -170,13 +206,15 @@ cc.Class({
 
     restart()
     {
+        cc.audioEngine.stop(this.bkMusic)
+        this.bkMusic = cc.audioEngine.play(this.audioBk, true)
         this.enterState(State.STATE_NORMAL)
         var player = this.playerNode.getComponent('Player')
         player.restart()
         this.score = 0
         this.curLevel = 1
         this.beginChangeBK = false
-        this.scoreNode.getComponent(cc.Label).string = 0
+        this.scoreNode.getComponent(cc.Label).string = 0 + '米'
         for(var i = 0; i < this.enemys.length; i++)
             this.enemys[i].destroy()
         this.enemys = []
@@ -254,7 +292,7 @@ cc.Class({
             this.background1.y -= this.logicSpeed
             this.background2.y -= this.logicSpeed
             this.score += this.logicSpeed / 200
-            this.scoreNode.getComponent(cc.Label).string = Math.floor(this.score)
+            this.scoreNode.getComponent(cc.Label).string = Math.floor(this.score) + '米'
             
             //刷障碍物
             if(this.preLogicSpeed > 20 && this.logicSpeed <= 20 && this.enemyTimeout <= 0)
@@ -353,7 +391,7 @@ cc.Class({
                 
                 var player = this.playerNode.getComponent('Player')
 
-                var speed = this.SPEED_A * this.score + this.SPEED_B / (this.lineNode.width + 340) - this.playerNode.y / this.SPEED_C
+                var speed = this.SPEED_A * this.score + this.SPEED_B / (this.lineNode.width + 240) - this.playerNode.y / this.SPEED_C
                 cc.log("速度值" + speed)
                 //cc.log(this.lineNode.rotate)
                 var angle = this.lineNode.rotation * Math.PI / 180
@@ -362,7 +400,7 @@ cc.Class({
                 var vHorz = speed * Math.sin(angle)
                 var vVert = Math.abs(speed * Math.cos(angle))
                 this.enterState(State.STATE_STAY)
-                var maxSpeed = this.SPEED_A * this.score + this.SPEED_B / (this.LINE_LENGTH_MIN + 340)
+                var maxSpeed = this.SPEED_A * this.score + this.SPEED_B / (this.LINE_LENGTH_MIN + 240)
                 player.setStayData(vVert, vHorz, maxSpeed)
             }
         }
@@ -387,29 +425,40 @@ cc.Class({
             var ret = this.enemys[i].getComponent('Enemy').checkCrash(this.playerNode.getComponent('Player'))
             if(ret.result == 0)//直接结束
             {
+                var effect = cc.instantiate(this.effectCrash)
+                this.node.getParent().addChild(effect)
+                effect.x = player.node.x
+                effect.y = player.node.y
+                effect.getComponent('EffectCrash').gameManager = this
+                cc.audioEngine.playEffect(this.audioDead, false);
                 this.enterState(State.STATE_PREPAIR_DEAD)
             }
             else if(ret.result == -1)
                 continue
             else
             {
+                var effect = cc.instantiate(this.effectCrash)
+                this.node.getParent().addChild(effect)
+                effect.x = player.node.x
+                effect.y = player.node.y
+                effect.getComponent('EffectCrash').gameManager = this
                 this.clearCrashFlag()
                 this.enemys[i].getComponent('Enemy').crashFlag = true
                 if(ret.result == 1)//向上
                 {
-                    player.up(ret.top)
+                    player.up(true)
                 }
                 else if(ret.result == 2)//向右
                 {
-                    player.right(ret.right)
+                    player.right(true)
                 }
                 else if(ret.result == 3)//向下
                 {
-                    player.down(ret.bottom)
+                    player.down(true)
                 }
                 else if(ret.result == 4)//向左
                 {
-                    player.left(ret.left)
+                    player.left(true)
                 }
             }
         }

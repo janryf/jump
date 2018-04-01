@@ -98,35 +98,42 @@ cc.Class({
         this.getComponent(cc.Animation).play('animStay')
     },
 
-    up(crashUp)
+    up(isEnemy)
     {
         //this.node.x = this.orgX
         //this.node.y = crashUp + this.node.height * this.node.scaleY + 1
+        if(isEnemy)
+            cc.audioEngine.playEffect(this.gameManager.audioCrash, false);
         this.vVert = Math.abs(this.vVert)
     },
 
-    right(crashRight)
+    right(isEnemy)
     {
+        if(isEnemy)
+            cc.audioEngine.playEffect(this.gameManager.audioCrash, false);
         this.toward(1)
         //this.node.x = crashRight + 1
         //this.node.y = this.orgY
         //this.vHorz = Math.min(this.vHorz + this.gameManager.BOUNCE_OFF, 0)
         this.vHorz = 0.5 * Math.abs(this.vHorz)
+        if(this.vHorz < 200)
+            this.vHorz = 200
         this.rushNode.active = false
     },
 
-    down(crashDown)
+    down(isEnemy)
     {
-        this.node.x = this.orgX
-        this.node.y = crashDown - 1
-        this.vVert *= 0.1
-        this.vVert *= -1
+        if(isEnemy)
+            cc.audioEngine.playEffect(this.gameManager.audioCrash, false);
+        this.vVert = -0.1 * Math.abs(this.vVert)
         this.getComponent(cc.Animation).play('animFall')
         this.gameManager.showSpeedLine(false)
     },
 
-    left(crashLeft)
+    left(isEnemy)
     {
+        if(isEnemy)
+            cc.audioEngine.playEffect(this.gameManager.audioCrash, false);
         //cc.log('往左弹' + this.node.x + " " + crashLeft)
         this.toward(0)
         //cc.log('往左弹---' + this.node.x + " " + crashLeft)
@@ -134,6 +141,8 @@ cc.Class({
         //this.node.y = this.orgY
         //this.vHorz = Math.max(this.vHorz - this.gameManager.BOUNCE_OFF, 0)
         this.vHorz = -0.5 * Math.abs(this.vHorz)
+        if(this.vHorz > -200)
+            this.vHorz = -200
         this.rushNode.active = false
     },
 
@@ -151,7 +160,7 @@ cc.Class({
                 this.vVert = _bakVVert
                 this.vHorz = _bakVHorz
                 this.getComponent(cc.Animation).play('animJump')
-                cc.audioEngine.playEffect(this.jumpAudio, false);
+                cc.audioEngine.playEffect(this.gameManager.audioJump, false);
                 if(this.vVert >= _maxSpeed / 2)
                 {
                     this.rushNode.active = true
@@ -233,12 +242,12 @@ cc.Class({
         if(this.node.x < -screenWidth / 2 + this.node.width * Math.abs(this.node.scaleX) / 2)
 		{
 			this.gameManager.clearCrashFlag()
-            this.right(-screenWidth / 2)
+            this.right(false)
 		}
         else if(this.node.x > screenWidth / 2 - this.node.width * Math.abs(this.node.scaleX) / 2)
 		{
 			this.gameManager.clearCrashFlag()
-            this.left(screenWidth / 2)
+            this.left(false)
 		}
     },  
 });

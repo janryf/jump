@@ -32,7 +32,10 @@ cc.Class({
             return
 
         if(this.gameManager.getCurState() == State.STATE_MAIN_MENU)
+        {
+            this.gameManager.bkMusic = cc.audioEngine.play(this.gameManager.audioBk, true);
             this.gameManager.enterState(State.STATE_NORMAL)
+        }
 
         if(this.gameManager.getLineNode() != null)
         {

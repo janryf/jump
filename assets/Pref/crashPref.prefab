@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "EnemyCloud",
+    "_name": "crashPref",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -47,17 +47,17 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 302,
-      "height": 100
+      "width": 59,
+      "height": 58
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
+    "_scaleX": 2,
+    "_scaleY": 2,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 525,
+      "y": 1153
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -75,7 +75,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "90fd19c5-15d7-47e0-8f93-ebeef87e4155"
+      "__uuid__": "ab8a7f6a-69eb-47c4-b177-daa85c2e44e6"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -101,17 +101,17 @@
     },
     "_enabled": true,
     "_defaultClip": {
-      "__uuid__": "baac8092-a32b-4f8f-b5b3-f306e0feb64b"
+      "__uuid__": "e80f458a-f872-4946-a151-9385942f2dc0"
     },
     "_clips": [
       {
-        "__uuid__": "baac8092-a32b-4f8f-b5b3-f306e0feb64b"
+        "__uuid__": "e80f458a-f872-4946-a151-9385942f2dc0"
       }
     ],
     "playOnLoad": true
   },
   {
-    "__type__": "dd9cb3qNgNBOIyU15Vgff1s",
+    "__type__": "2f48cA7+kpK7q2tGAWzGPks",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -125,9 +125,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "52b5d96d-507c-4ef1-82ad-8bde0a0171ca"
+      "__uuid__": "36d6d70a-659c-4723-a8d2-0cf5452fafbc"
     },
-    "fileId": "cb9Fv794FMib+TPtt8GYeU",
+    "fileId": "9alGEAFsNHo50FilKmju6k",
     "sync": false
   }
 ]

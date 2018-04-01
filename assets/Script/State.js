@@ -28,11 +28,14 @@ export function enterState(gameManager, state)
     }
     else if(state == STATE_DEAD)
     {
+        cc.audioEngine.stop(gameManager.bkMusic)
+        cc.audioEngine.play(gameManager.audioGameover)
         gameManager.logicSpeed = 0
         gameManager.playerNode.getComponent('Player').vHorz = 0
         gameManager.playerNode.getComponent('Player').vVert = 0
         gameManager.overScoreNode.active = true
-        gameManager.overScoreNode.getComponent(cc.Label).string = '成绩为：' + gameManager.scoreNode.getComponent(cc.Label).string + "米"
+        gameManager.overScoreBg.active = true
+        gameManager.overScoreNode.getComponent(cc.Label).string = '成绩为：' + gameManager.scoreNode.getComponent(cc.Label).string
         gameManager.buttonRestart.active = true
         if(gameManager.lineNode != null)
         {
@@ -58,6 +61,7 @@ export function enterState(gameManager, state)
         gameManager.guideNode.active = true
         gameManager.bestScoreNode.active = false
         gameManager.scoreNode.active = false
+        gameManager.scoreBg.active = false
     }
 }
 
@@ -82,6 +86,7 @@ export function leaveState(gameManager, state)
     else if(state == STATE_DEAD)
     {
         gameManager.overScoreNode.active = false
+        gameManager.overScoreBg.active = false
         gameManager.buttonRestart.active = false
     }
     else if(state == STATE_MAIN_MENU)
@@ -89,5 +94,6 @@ export function leaveState(gameManager, state)
         gameManager.logoNode.active = false
         gameManager.guideNode.active = false
         gameManager.scoreNode.active = true
+        gameManager.scoreBg.active = true
     }
 }

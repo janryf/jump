@@ -1,151 +1,163 @@
 export var enemyGroups = [
 
-    //0组 木板中静止
+    //0组 云中静止
       [
         {
-            name: 'rulai',
+            name: 'cloud',
             x: 0,
             y: 350,
-            vSpeed : -100,
+            vSpeed : 0,
             hSpeed : 0,
-            time : 1000000,
+            time : 0,
           },  
        ], 
-   //1组 木板右边静止
+   //1组 云右边静止
      [
         {
-            name: 'hulu',
+            name: 'cloud',
             x: 400,
             y: 350,
             vSpeed : 0,
-            hSpeed : 100,
+            hSpeed : 0,
             time : 0,
           },       
      ],
-   //2组 木板左边静止
+   //2组 云左边静止
         [
          {
-            name: 'hulu',
+            name: 'cloud',
             x: -400,
             y: 350,
             vSpeed : 0,
-            hSpeed : -100,
+            hSpeed : 0,
             time : 0,
          },
         ],
-   //3组 右飞机慢
+   //3组 右唐僧慢
      [
      {
-        name: 'heli',
+        name: 'tang',
         x: 400,
         y: 350,
-        vSpeed : -100,
-        hSpeed : -100,
-        time : 1,
+        vSpeed : -50,
+        hSpeed : -60,
+        time : 10000,
      },
      ],
-   //4组 左飞机中
+   //4组 左唐僧右云
     [
      {
-        name: 'heli',
+        name: 'tang',
         x: -400,
         y: 350,
-        vSpeed : -100,
-        hSpeed : -150,
+        vSpeed : -80,
+        hSpeed : -100,
         time : 1,
+        name: 'cloud',
+        x: 400,
+        y: 350,
+        vSpeed : 0,
+        hSpeed : 0,
+        time : 0,
      },
     ],
-   //5组 中飞机快
+   //5组 中葫芦左云
         [
             {
-                name: 'heli',
+                name: 'hulu',
                 x: 0,
                 y: 350,
-                vSpeed : -150,
-                hSpeed : -30,
+                vSpeed : -100,
+                hSpeed : -40,
                 time : 1,
+                name: 'cloud',
+                x: -400,
+                y: 350,
+                vSpeed : 0,
+                hSpeed : 0,
+                time : 0,
             },
         ],
-   //6组 2右飞机慢
+   //6组 2右唐僧中
     [
      {
-        name: 'heli',
+        name: 'tang',
         x: 450,
-        y: 350,
-        vSpeed : -100,
+        y: 400,
+        vSpeed : -120,
         hSpeed : -100,
         time : 1,
     },
     {
-    name: 'heli',
+    name: 'tang',
     x: 250,
-    y: 250,
-    vSpeed : -100,
+    y: 300,
+    vSpeed : -120,
     hSpeed : -100,
     time : 1,
     },
     ],
-   //7组 2左飞机慢
+   //7组 2左唐僧慢
     [
      {
-        name: 'heli',
+        name: 'tang',
         x: -450,
-        y: 350,
-        vSpeed : -100,
-        hSpeed : 100,
+        y: 400,
+        vSpeed : -70,
+        hSpeed : 60,
         time : 1,
     },
     {
-    name: 'heli',
+    name: 'tang',
     x: -250,
-    y: 250,
-    vSpeed : -100,
-    hSpeed : 100,
+    y: 300,
+    vSpeed : -70,
+    hSpeed : 60,
     time : 1,
     },
     ],
-   //8组 2左飞机快
+   //8组 2左葫芦快
     [
      {
-        name: 'heli',
+        name: 'hulu',
         x: -450,
-        y: 350,
+        y: 400,
         vSpeed : -200,
-        hSpeed : 300,
+        hSpeed : 150,
         time : 1,
      },
      {
-    name: 'heli',
+    name: 'hulu',
     x: -250,
-    y: 250,
+    y: 300,
     vSpeed : -200,
-    hSpeed : 300,
+    hSpeed : 250,
     time : 0,
     },
     ],
-   //9组 2中飞机中
+   //9组 2中葫芦中
     [
     {
-        name: 'heli',
+        name: 'hulu',
         x: 100,
         y: 350,
         vSpeed : -100,
-        hSpeed : 150,
+        hSpeed : 110,
         time : 1,
     },
     {
-    name: 'heli',
+    name: 'hulu',
     x: -100,
     y: 250,
     vSpeed : -100,
-    hSpeed : -150,
+    hSpeed : -110,
     time : 1,
     },
     ],
-   //10组 3左飞机慢
+   //10组 3左唐僧慢
     [
         {
-            name: 'heli',
+            name: 'tang',
             x: -400,
             y: 350,
             vSpeed : -100,
@@ -153,7 +165,7 @@ export var enemyGroups = [
             time : 0,
         },
         {
-            name: 'heli',
+            name: 'tang',
             x: -200,
             y: 500,
             vSpeed : -100,
@@ -161,7 +173,7 @@ export var enemyGroups = [
             time : 0,
         },
         {
-           name: 'heli',
+           name: 'tang',
            x: 0,
            y: 650,
            vSpeed : -100,
@@ -169,37 +181,37 @@ export var enemyGroups = [
            time : 0,
          },
     ],
-   //11组 3右飞机慢
+   //11组 3右葫芦中
     [
         {
-            name: 'heli',
+            name: 'hulu',
             x: 400,
             y: 350,
-            vSpeed : -100,
-            hSpeed : -70,
+            vSpeed : -130,
+            hSpeed : -110,
             time : 0,
         },
         {
-            name: 'heli',
+            name: 'hulu',
             x: 200,
             y: 500,
-            vSpeed : -100,
-            hSpeed : -70,
+            vSpeed : -130,
+            hSpeed : -110,
             time : 0,
         },
         {
-           name: 'heli',
+           name: 'hulu',
            x: 0,
            y: 650,
            vSpeed : -100,
-           hSpeed :-70,
+           hSpeed :-110,
            time : 0,
          },
     ],
-   //12组 3中飞机慢右1
+   //12组 3中葫芦慢右1
     [
         {
-            name: 'heli',
+            name: 'hulu',
             x: 200,
             y: 350,
             vSpeed : -100,
@@ -207,7 +219,7 @@ export var enemyGroups = [
             time : 0,
         },
         {
-            name: 'heli',
+            name: 'hulu',
             x: 0,
             y: 350,
             vSpeed : -100,
@@ -215,7 +227,7 @@ export var enemyGroups = [
             time : 0,
         },
         {
-           name: 'heli',
+           name: 'hulu',
            x: -200,
            y: 350,
            vSpeed : -100,
@@ -223,10 +235,10 @@ export var enemyGroups = [
            time : 0,
          },
     ],
-   //13组 3中飞机慢左1
+   //13组 3中唐僧慢左1
     [
     {
-        name: 'heli',
+        name: 'tang',
         x: 200,
         y: 350,
         vSpeed : -100,
@@ -234,7 +246,7 @@ export var enemyGroups = [
         time : 0,
     },
     {
-        name: 'heli',
+        name: 'tang',
         x: 0,
         y: 350,
         vSpeed : -100,
@@ -242,7 +254,7 @@ export var enemyGroups = [
         time : 0,
     },
     {
-       name: 'heli',
+       name: 'tang',
        x: -200,
        y: 350,
        vSpeed : -100,
@@ -250,10 +262,10 @@ export var enemyGroups = [
        time : 0,
      },
     ],
-   //14组 4右飞机慢
+   //14组 4右唐僧慢
     [
     {
-        name: 'heli',
+        name: 'tang',
         x: 450,
         y: 590,
         vSpeed : -60,
@@ -261,7 +273,7 @@ export var enemyGroups = [
         time : 1,
     },
     {
-        name: 'heli',
+        name: 'tang',
         x: 300,
         y: 510,
         vSpeed : -60,
@@ -269,7 +281,7 @@ export var enemyGroups = [
         time : 1,
     },
     {
-        name: 'heli',
+        name: 'tang',
         x: 150,
         y: 430,
         vSpeed : -60,
@@ -277,7 +289,7 @@ export var enemyGroups = [
         time : 1,
     },
     {
-        name: 'heli',
+        name: 'tang',
         x: 0,
         y: 350,
         vSpeed : -60,
@@ -286,10 +298,10 @@ export var enemyGroups = [
     },
 
     ],
-   //15组 4左飞机慢
+   //15组 4左葫芦慢
     [
         {
-            name: 'heli',
+            name: 'hulu',
             x: -450,
             y: 590,
             vSpeed : -60,
@@ -297,24 +309,24 @@ export var enemyGroups = [
             time : 1,
         },
         {
-            name: 'heli',
-            x: -300,
+            name: 'hulu',
+            x: -200,
             y: 510,
             vSpeed : -60,
             hSpeed : 80,
             time : 1,
         },
         {
-            name: 'heli',
-            x: -150,
+            name: 'hulu',
+            x: 0,
             y: 430,
             vSpeed : -60,
             hSpeed : 80,
             time : 1,
         },
         {
-            name: 'heli',
-            x: 0,
+            name: 'hulu',
+            x: 300,
             y: 350,
             vSpeed : -60,
             hSpeed : 80,
@@ -322,10 +334,10 @@ export var enemyGroups = [
         },
 
     ],
-   //16组 4中飞机慢
+   //16组 4中唐僧慢
     [
     {
-        name: 'heli',
+        name: 'tang',
         x: -450,
         y: 250,
         vSpeed : -60,
@@ -333,7 +345,7 @@ export var enemyGroups = [
         time : 0,
     },
     {
-        name: 'heli',
+        name: 'tang',
         x: -300,
         y: 450,
         vSpeed : -60,
@@ -341,7 +353,7 @@ export var enemyGroups = [
         time : 0,
     },
     {
-        name: 'heli',
+        name: 'tang',
         x: 450,
         y: 250,
         vSpeed : -60,
@@ -349,7 +361,7 @@ export var enemyGroups = [
         time : 0,
     },
     {
-        name: 'heli',
+        name: 'tang',
         x: 300,
         y: 450,
         vSpeed : -60,
@@ -358,10 +370,10 @@ export var enemyGroups = [
     },
 
     ],
-   //17组 中1UFO+1飞机
+   //17组 中1如来+1唐僧
     [
     {
-        name: 'ufo',
+        name: 'rulai',
         x: 0,
         y: 250,
         vSpeed : -50,
@@ -369,7 +381,7 @@ export var enemyGroups = [
         time : 1,
     },
     {
-        name: 'heli',
+        name: 'tang',
         x: 0,
         y: 450,
         vSpeed : 0,
@@ -377,10 +389,10 @@ export var enemyGroups = [
         time : 1,
     },
      ],
-   //18组 2中UFO快
+   //18组 2中如来快
     [
     {
-        name: 'ufo',
+        name: 'rulai',
         x: 0,
         y:350,
         vSpeed : 0,
@@ -388,7 +400,7 @@ export var enemyGroups = [
         time : 3,
     },
     {
-        name: 'ufo',
+        name: 'rulai',
         x: 0,
         y: 550,
         vSpeed : 0,
@@ -396,10 +408,10 @@ export var enemyGroups = [
         time : 3,
     },
     ], 
-   //19组 2中UFO慢
+   //19组 2中如来慢
     [
     {
-        name: 'ufo',
+        name: 'rulai',
         x: 0,
         y:350,
         vSpeed : 0,
@@ -407,7 +419,7 @@ export var enemyGroups = [
         time : 0,
     },
     {
-        name: 'ufo',
+        name: 'rulai',
         x: 0,
         y: 550,
         vSpeed : 0,
@@ -416,10 +428,10 @@ export var enemyGroups = [
     },
     ],    
 
-   //20组 2左右UFO慢
+   //20组 2左右如来慢
     [
      {
-        name: 'ufo',
+        name: 'rulai',
         x: 450,
         y:350,
         vSpeed : 0,
@@ -427,7 +439,7 @@ export var enemyGroups = [
         time : 0,
      },
      {
-        name: 'ufo',
+        name: 'rulai',
         x: -450,
         y: 550,
         vSpeed : 0,
@@ -435,18 +447,18 @@ export var enemyGroups = [
         time : 0,
      },
      ],    
-   //21组 3UFO慢
+   //21组 3如来慢
     [
      {
-        name: 'ufo',
+        name: 'rulai',
         x: 0,
         y:350,
         vSpeed : -30,
-        hSpeed : 130,
+        hSpeed : 90,
         time : 0,
      },
      {
-        name: 'ufo',
+        name: 'rulai',
         x: -0,
         y: 520,
         vSpeed : -30,
@@ -454,11 +466,11 @@ export var enemyGroups = [
         time : 0,
      },
      {
-        name: 'ufo',
+        name: 'rulai',
         x: 0,
         y: 690,
         vSpeed : -30,
-        hSpeed : -130,
+        hSpeed : -90,
         time : 0,
      },
      ],   
@@ -473,19 +485,19 @@ export var levels = [
 //第一级别
 {
     milesMax: 50,
-    groups: [0,1,2],
-    weight:[10,10,10],//一定要确保这个数组里的元素数跟上一个数组相同
+    groups: [0,1,2,3,4],
+    weight:[10,10,10,10,10],//一定要确保这个数组里的元素数跟上一个数组相同
 },
  //第二级别
 {
     milesMax: 100,
-    groups: [0,3,4],
+    groups: [0,3,5],
     weight:[5,10,10],//一定要确保这个数组里的元素数跟上一个数组相同
 },
 //第三级别
 {
     milesMax: 150,
-    groups: [2,3,4,5],
+    groups: [2,3,5,6],
     weight:[10,20,20,20],//一定要确保这个数组里的元素数跟上一个数组相同
 },
 //第四级别

@@ -43,7 +43,7 @@
                 "children": [
                   "scene"
                 ],
-                "height": 530,
+                "height": 444,
                 "type": "panel",
                 "width": 944
               },
@@ -53,7 +53,7 @@
                   "console",
                   "timeline"
                 ],
-                "height": 226,
+                "height": 312,
                 "type": "panel",
                 "width": 944
               }
@@ -122,6 +122,12 @@
       "y": 151,
       "width": 470,
       "height": 574
+    },
+    "timeline.event": {
+      "x": 592,
+      "y": 206,
+      "width": 416,
+      "height": 438
     }
   }
 }
