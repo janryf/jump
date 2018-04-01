@@ -231,8 +231,14 @@ cc.Class({
         //cc.log(this.node.x)
         //cc.log(this.node.x + " " + (screenWidth / 2 - this.node.width * this.node.scaleX / 2) + " " + this.node.width)
         if(this.node.x < -screenWidth / 2 + this.node.width * Math.abs(this.node.scaleX) / 2)
+		{
+			this.gameManager.clearCrashFlag()
             this.right(-screenWidth / 2)
+		}
         else if(this.node.x > screenWidth / 2 - this.node.width * Math.abs(this.node.scaleX) / 2)
+		{
+			this.gameManager.clearCrashFlag()
             this.left(screenWidth / 2)
+		}
     },  
 });

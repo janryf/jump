@@ -55,6 +55,6 @@ cc.Class({
         {
             return {result:0}
         }
-        return -1
+        return {result:-1}
     },
 });

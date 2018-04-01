@@ -44,6 +44,7 @@ cc.Class({
     {
         var top1 = player.node.y
         var right1 = player.node.x + 45
+        var right1 = player.node.x + player.node.width * player.node.scaleX
         var down1 = player.node.y - player.node.height
         var left1 = player.node.x - 45
         
@@ -93,7 +94,7 @@ cc.Class({
                 return {result:ret, top:top2, right:right2, down:down2, left:left2}
             }
         }
-        return -1
+        return {result:-1}
         /*
         var kvDataList = new Array();
 kvDataList.push({key:"you_defined_key",value:"you_defined_key_related_value"});
