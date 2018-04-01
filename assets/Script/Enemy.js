@@ -1,33 +1,8 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 var State = require('State')
 
 cc.Class({
     extends: cc.Component,
-
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
     },
     gameManager : null,
     orgX : 0,
@@ -38,11 +13,8 @@ cc.Class({
     timeout : 0,
     crashFlag : false,
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
-
-    start () {
+    start () 
+    {
         this.timeout = 0
         this.orgX = 0
         this.orgY = 0
@@ -52,7 +24,6 @@ cc.Class({
     setEnemyData(gameManager, x, y, vSpeed, hSpeed)
     {
         this.gameManager = gameManager
-        //gameManager.node.getParent().addChild(this.node)
         this.node.x = x
         this.node.y = y
         this.vSpeed = vSpeed
@@ -64,7 +35,7 @@ cc.Class({
     {
         this.orgX = this.node.x
         this.orgY = this.node.y
-        if(this.gameManager != null && this.gameManager.logicSpeed > 0)
+        if(this.gameManager != null && this.gameManager.logicSpeed > 0)//随着屏幕滚动而出现，下落速度要比屏幕滚动速度更快
         {
             this.node.y -= this.gameManager.logicSpeed * 1.8
         }
@@ -78,7 +49,7 @@ cc.Class({
             //cc.log(sHorz)
             this.node.y += sVert
             this.node.x += sHorz 
-            if(this.node.x < -screenWidth / 2 + this.node.width / 2)
+            if(this.node.x < -screenWidth / 2 + this.node.width / 2)//碰到左右边缘之后折返
             {
                 this.node.x = -screenWidth / 2 + this.node.width / 2
                 this.hSpeed *= -1

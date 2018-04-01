@@ -1,12 +1,4 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+//用来表示背景，最重要的功能是滚动和在上面画出反弹线
 var Line = require('Line')
 var State = require('State')
 
@@ -14,47 +6,24 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
         startPos : 0,
         stickStraight : {
             default : null,
             type : cc.Prefab,
         },
-        //arrow : {
-          //  default : null,
-            //type : cc.node,
-        //},
-
-        gameManagerNode : {
-            default : null,
-            type : cc.Node , 
-        },
         gameManager : null,
-        },
-
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
+    },
 
     start () 
     {
         this.node.on('touchstart', this.touchStart.bind(this))
         this.node.on('touchmove', this.touchMove.bind(this))
-        this.gameManager = this.gameManagerNode.getComponent('GameManager')
+    },
+
+    initData(gameManager, stickPref)
+    {
+        this.gameManager = gameManager
+        this.stickStraight = stickPref
     },
 
     touchStart(event)

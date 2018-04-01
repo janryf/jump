@@ -5,11 +5,17 @@ var Enemy = require('Enemy')
 var EnemyBlock = require('EnemyBlock')
 var SpawnData = require('SpawnData')
 var State = require('State')
+var ground = require('ground')
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
+        background :{
+            default : null,
+            type : cc.Node,
+        },
+        
         background1 :{
             default : null,
             type : cc.Node,
@@ -17,17 +23,18 @@ cc.Class({
         background2 :{
             default : null,
             type : cc.Node,
-        },//目前暂时拼两张背景图
+        },
 
-        //配置项，全大写加下划线命名
+        //-------- 配置项，全大写加下划线命名 ------------ 2304 192
         LINE_LENGTH_MAX : 180,//绳子的最大长度
         LINE_LENGTH_MIN : 35,//绳子的最小长度
+        LEVELS : [cc.Integer],
         GRAVITY : 6,//重力系数
         STAY_TIME : 0.4,//在绳子上停留的时间
         SPEED_A : 0,
         SPEED_B : 0,
         SPEED_C : 0,
-        BOUNCE_OFF : 1,
+        BOUNCE_OFF : 1,//------------------------------
         
         playerNode :{
             default : null,
@@ -37,15 +44,15 @@ cc.Class({
             default : null,
             type : cc.Node,
         },
-        stickBend : {
-            default : null,
-            type : cc.Prefab,
-        },
+        score : 0,
+        curLevel : 1,
+        beginChangeBK : false,
+
+        //--------- ui ------------
         scoreNode : {
             default : null,
             type : cc.Node,
         },
-        score : 0,
         overScoreNode : {
             default : null,
             type : cc.Node,
@@ -54,26 +61,28 @@ cc.Class({
             default : null,
             type : cc.Node,
         },
-
-        speedLineNode : {
+        logoNode : {
             default : null,
             type : cc.Node,
         },
-        
+        guideNode : {
+            default : null,
+            type : cc.Node,
+        },
         buttonRestart:{
             default : null,
             type : cc.Node,
-        },
-        enemyNode:{
-            default : null,
-            type : cc.Node,
-        },
+        },//-------------------------
 
+        //----------- prefab --------------
         backgroundAudio: {
             default: null,
             url: cc.AudioClip
         },
-        enemys : [],
+        stickBend : {
+            default : null,
+            type : cc.Prefab,
+        },
         enemyPref : {
             default : null,
             type : cc.Prefab,
@@ -86,6 +95,24 @@ cc.Class({
             default : null,
             type : cc.Prefab,
         },
+        bgPrefs : [cc.Prefab],
+        stickPref : {
+            default : null,
+            type : cc.Prefab,
+        },
+        //--------------------------------
+
+        speedLineNode : {
+            default : null,
+            type : cc.Node,
+        },
+        
+        enemyGroupNode:{
+            default : null,
+            type : cc.Node,
+        },
+
+        enemys : [],
     },
     logicSpeed : 0,//游戏的逻辑速度，影响得分和背景等滚动速度
     enemyTimeout : 0,// 
@@ -121,8 +148,21 @@ cc.Class({
         this.buttonRestart.active = false
         this.speedLineNode.active = false
         this.score = 0
+        this.curLevel = 1
+        this.beginChangeBK = false
         this.enemyTimeout = 2
         this.enterState(State.STATE_MAIN_MENU)
+
+        this.background1 = cc.instantiate(this.bgPrefs[0])
+        this.background1.getComponent('ground').initData(this, this.stickPref)
+        this.background.addChild(this.background1)
+        this.background1.x = 0
+        this.background1.y = 192
+        this.background2 = cc.instantiate(this.bgPrefs[1])
+        this.background2.getComponent('ground').initData(this, this.stickPref)
+        this.background.addChild(this.background2)
+        this.background2.x = 0
+        this.background2.y = 192 + 2304
     },
 
     restart()
@@ -131,6 +171,8 @@ cc.Class({
         var player = this.playerNode.getComponent('Player')
         player.restart()
         this.score = 0
+        this.curLevel = 1
+        this.beginChangeBK = false
         this.scoreNode.getComponent(cc.Label).string = 0
         for(var i = 0; i < this.enemys.length; i++)
             this.enemys[i].destroy()
@@ -144,6 +186,17 @@ cc.Class({
             year: (new Date()).getFullYear()
             })
         }
+
+        this.background1 = cc.instantiate(this.bgPrefs[0])
+        this.background1.getComponent('ground').initData(this, this.stickPref)
+        this.background.addChild(this.background1)
+        this.background1.x = 0
+        this.background1.y = 192
+        this.background2 = cc.instantiate(this.bgPrefs[1])
+        this.background2.getComponent('ground').initData(this, this.stickPref)
+        this.background.addChild(this.background2)
+        this.background2.x = 0
+        this.background2.y = 192 + 2304
     },
 
     enterState(state)
@@ -183,6 +236,7 @@ cc.Class({
 
     update (dt) 
     {
+        //cc.log(this.background1.x + " " + this.background.x)
         if(this.wechat == 1) 
         {
             let openDataContext = wx.getOpenDataContext()
@@ -214,7 +268,7 @@ cc.Class({
                         enemy = cc.instantiate(this.ufoPref)
                     else if(enemyInfo.name == 'heli')
                         enemy = cc.instantiate(this.heliPref)
-                    this.enemyNode.addChild(enemy)
+                    this.enemyGroupNode.addChild(enemy)
                     //this.node.getParent().addChild(enemy)
                     enemy.getComponent("Enemy").setEnemyData(this, enemyInfo.x, enemyInfo.y + 1000, enemyInfo.vSpeed, enemyInfo.hSpeed)
                     this.enemys.push(enemy)
@@ -223,10 +277,57 @@ cc.Class({
             this.preLogicSpeed = this.logicSpeed
         }
         this.enemyTimeout -= dt 
-        if(this.background1.y < -(this.node.getParent().height) / 2)
-            this.background1.y += this.background1.height * 2
-        if(this.background2.y < -(this.node.getParent().height) / 2)
-            this.background2.y += this.background2.height * 2
+        
+        //滚动背景
+        var actualLevel = 0
+        for(var i = this.LEVELS.length - 1; i >= 0; i--)
+        {
+            if(this.score >= this.LEVELS[i])
+            {
+                actualLevel = i + 1
+                break
+            }
+        }
+
+        if(actualLevel > this.curLevel)
+        {
+            if(this.background2.y < 192)
+            {
+                var targetBkIndex = (actualLevel - 1) * 2
+                if(this.background1.name != this.bgPrefs[targetBkIndex].name)
+                {
+                    this.beginChangeBK = true
+                    this.background1.destroy()
+                    this.background1 = cc.instantiate(this.bgPrefs[(actualLevel - 1) * 2])
+                    this.background1.getComponent('ground').initData(this, this.stickPref)
+                    this.background.addChild(this.background1)
+                    this.background1.x = 0
+                    this.background1.y = this.background2.y + 2304
+                }
+            }
+            if(this.background1.y < 192 && this.beginChangeBK)
+            {
+                this.beginChangeBK = false
+                this.background2.destroy()
+                this.background2 = cc.instantiate(this.bgPrefs[(actualLevel - 1) * 2 + 1])
+                this.background2.getComponent('ground').initData(this, this.stickPref)
+                this.background.addChild(this.background2)
+                this.background2.x = 0
+                this.background2.y = this.background1.y + 2304
+                this.curLevel = actualLevel
+            }
+        }
+        else
+        {
+            if(this.background2.y < 192)
+            {
+                this.background1.y = this.background2.y + 2304
+            }
+            if(this.background1.y < 192)
+            {
+                this.background2.y = this.background1.y + 2304
+            }
+        }
         
         if(this.curState != State.STATE_NORMAL)
             return//只在normal状态下检测主角跟绳子和障碍物的碰撞

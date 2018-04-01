@@ -44,8 +44,8 @@ cc.Class({
         this.node.on('touchstart', this.onMouseDown.bind(this))
         this.gameManager = this.gameManagerNode.getComponent('GameManager')
         this.restart()
-        //this.rushNode.getComponent(cc.Animation).play('rushAnim')
-        //this.rushNode.active = false
+        this.rushNode.getComponent(cc.Animation).play('rushAnim')
+        this.rushNode.active = false
     },
 
     //0为左边，1为右边
@@ -112,7 +112,7 @@ cc.Class({
         //this.node.y = this.orgY
         //this.vHorz = Math.min(this.vHorz + this.gameManager.BOUNCE_OFF, 0)
         this.vHorz = 0.5 * Math.abs(this.vHorz)
-        //this.rushNode.active = false
+        this.rushNode.active = false
     },
 
     down(crashDown)
@@ -134,7 +134,7 @@ cc.Class({
         //this.node.y = this.orgY
         //this.vHorz = Math.max(this.vHorz - this.gameManager.BOUNCE_OFF, 0)
         this.vHorz = -0.5 * Math.abs(this.vHorz)
-        //this.rushNode.active = false
+        this.rushNode.active = false
     },
 
     update (dt) 
@@ -142,10 +142,10 @@ cc.Class({
         this.orgX = this.node.x
         this.orgY = this.node.y
 
-        if(this.gameManager.getCurState() == State.STATE_STAY)
+        if(this.gameManager.getCurState() == State.STATE_STAY)//处理停留状态
         {
             this.stayTimeout -= dt
-            if(this.stayTimeout <= 0)
+            if(this.stayTimeout <= 0)//停留时间到，解除停留
             {
                 this.gameManager.enterState(State.STATE_NORMAL)
                 this.vVert = _bakVVert
@@ -154,7 +154,7 @@ cc.Class({
                 cc.audioEngine.playEffect(this.jumpAudio, false);
                 if(this.vVert >= _maxSpeed / 2)
                 {
-                    //this.rushNode.active = true
+                    this.rushNode.active = true
                     this.gameManager.showSpeedLine(true)
                 }
                 if(this.vHorz > 0)
@@ -169,6 +169,7 @@ cc.Class({
         var screenWidth = this.node.getParent().width
         var screenHeight = this.node.getParent().height
 
+        //减慢在高处的停留时间
         var timeValue = 1
         if(this.node.y >= -screenHeight / 4)
         {
@@ -204,7 +205,7 @@ cc.Class({
 
         if(sVert <= 0)
         {
-            //this.rushNode.active = false
+            this.rushNode.active = false
         }
 
         if(this.gameManager.getCurState() == State.STATE_DEAD)
@@ -212,7 +213,7 @@ cc.Class({
 
         if(this.gameManager.score == 0)
         {
-            if(this.node.y < -screenHeight / 2 + this.node.height * this.node.scaleY)
+            if(this.node.y < -screenHeight / 2 + 320)
             {
                 this.vVert = Math.abs(this.vVert)
                 if(!this.stay)

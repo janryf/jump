@@ -6,9 +6,9 @@ export var enemyGroups = [
             name: 'block',
             x: 0,
             y: 350,
-            vSpeed : 0,
+            vSpeed : -100,
             hSpeed : 0,
-            time : 0,
+            time : 1000000,
           },  
        ], 
    //1组 木板右边静止

@@ -54,8 +54,10 @@ export function enterState(gameManager, state)
     }
     else if(state == STATE_MAIN_MENU)
     {
-        gameManager.bestScoreNode.active = true
-        //显示引导动画
+        gameManager.logoNode.active = true
+        gameManager.guideNode.active = true
+        gameManager.bestScoreNode.active = false
+        gameManager.scoreNode.active = false
     }
 }
 
@@ -84,8 +86,8 @@ export function leaveState(gameManager, state)
     }
     else if(state == STATE_MAIN_MENU)
     {
-        cc.log('隐藏')
-        gameManager.bestScoreNode.active = false
-        //隐藏引导动画
+        gameManager.logoNode.active = false
+        gameManager.guideNode.active = false
+        gameManager.scoreNode.active = true
     }
 }
