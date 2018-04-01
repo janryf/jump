@@ -183,7 +183,6 @@ cc.Class({
 
     update (dt) 
     {
-
         if(this.wechat == 1) 
         {
             let openDataContext = wx.getOpenDataContext()
@@ -200,6 +199,7 @@ cc.Class({
             this.score += this.logicSpeed / 200
             this.scoreNode.getComponent(cc.Label).string = Math.floor(this.score)
             
+            //刷障碍物
             if(this.preLogicSpeed > 20 && this.logicSpeed <= 20 && this.enemyTimeout <= 0)
             {
                 this.enemyTimeout = 2

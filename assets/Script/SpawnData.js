@@ -10,7 +10,7 @@ export var enemyGroups = [
             hSpeed : 0,
             time : 0,
           },  
-       ],
+       ], 
    //1组 木板右边静止
      [
         {

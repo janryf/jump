@@ -48,7 +48,7 @@ cc.Class({
 
     update (dt) 
     {
-        if(this.gameManager.logicSpeed > 0)
+        if(this.gameManager != null && this.gameManager.logicSpeed != null && this.gameManager.logicSpeed > 0)
         {
             this.node.y -= this.gameManager.logicSpeed
         }

@@ -142,7 +142,6 @@ cc.Class({
         this.orgX = this.node.x
         this.orgY = this.node.y
 
-
         if(this.gameManager.getCurState() == State.STATE_STAY)
         {
             this.stayTimeout -= dt
