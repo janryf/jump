@@ -90,6 +90,7 @@ cc.Class({
     logicSpeed : 0,//游戏的逻辑速度，影响得分和背景等滚动速度
     enemyTimeout : 0,// 
     curState : 0, 
+    wechat : 0,
 
     setLogicSpeed(logicSpeed)
     {
@@ -99,6 +100,7 @@ cc.Class({
     onLoad()
     {
         this.curState = -1
+        this.wechat = 0
     },
 
     showSpeedLine(bPlay)
@@ -133,6 +135,15 @@ cc.Class({
         for(i = 0; i < this.enemys.length; i++)
             this.enemys[i].destroy()
         this.enemys = []
+
+        if(this.wechat == 1)
+        {
+           var openDataContext = wx.getOpenDataContext()
+           openDataContext.postMessage({
+            text: 'hello',
+            year: (new Date()).getFullYear()
+            })
+        }
     },
 
     enterState(state)
@@ -164,6 +175,16 @@ cc.Class({
 
     update (dt) 
     {
+
+        if(this.wechat == 1) 
+        {
+            let openDataContext = wx.getOpenDataContext()
+            let sharedCanvas = openDataContext.canvas
+      
+            let context = canvas.getContext('2d')
+            context.drawImage(sharedCanvas, 0, 0)
+        }
+        
         if(this.logicSpeed > 0)//逻辑速度影响背景卷动和计分
         {
             this.background1.y -= this.logicSpeed

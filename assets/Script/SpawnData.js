@@ -1,7 +1,7 @@
 export var enemyGroups = [
     //0组
     [{
-        name: 'heli',
+        name: 'ufo',
         x: 0,
         y: 750,
         vSpeed : 0,

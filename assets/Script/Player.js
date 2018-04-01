@@ -27,10 +27,6 @@ cc.Class({
             default: null,
             url: cc.AudioClip
         },
-        enemyPref : {
-            default : null,
-            type : cc.Prefab,
-        },
         orgX : 0,//用于保存在上一帧里所处的位置
         orgY : 0,
         rushNode : {
@@ -48,8 +44,23 @@ cc.Class({
         this.node.on('touchstart', this.onMouseDown.bind(this))
         this.gameManager = this.gameManagerNode.getComponent('GameManager')
         this.restart()
-        this.rushNode.getComponent(cc.Animation).play('rushAnim')
-        this.rushNode.active = false
+        //this.rushNode.getComponent(cc.Animation).play('rushAnim')
+        //this.rushNode.active = false
+    },
+
+    //0为左边，1为右边
+    toward(direction)
+    {
+        if(direction == 0)
+        {
+            this.node.scaleX = Math.abs(this.node.scaleX)
+            //this.node.anchorX = 1
+        }
+        else
+        {
+            this.node.scaleX = -Math.abs(this.node.scaleX)
+            //this.node.anchorX = 0
+        }
     },
 
     restart()
@@ -84,23 +95,24 @@ cc.Class({
         this.vHorz = 0
         this.gameManager.setLogicSpeed(0)
         this.stayTimeout = this.gameManager.STAY_TIME
-        this.getComponent(cc.Animation).play('stay')
+        this.getComponent(cc.Animation).play('animStay')
     },
 
     up(crashUp)
     {
-        this.node.x = this.orgX
-        this.node.y = crashUp + this.node.height * this.node.scaleY + 1
-        this.vVert *= -1
+        //this.node.x = this.orgX
+        //this.node.y = crashUp + this.node.height * this.node.scaleY + 1
+        this.vVert = Math.abs(this.vVert)
     },
 
     right(crashRight)
     {
-        this.node.x = crashRight + 1
-        this.node.y = this.orgY
+        this.toward(1)
+        //this.node.x = crashRight + 1
+        //this.node.y = this.orgY
         //this.vHorz = Math.min(this.vHorz + this.gameManager.BOUNCE_OFF, 0)
-        this.vHorz *= -0.5
-        this.rushNode.active = false
+        this.vHorz = 0.5 * Math.abs(this.vHorz)
+        //this.rushNode.active = false
     },
 
     down(crashDown)
@@ -115,18 +127,21 @@ cc.Class({
 
     left(crashLeft)
     {
-        cc.log('往左弹' + crashLeft)
-        this.node.x = crashLeft - this.node.width * this.node.scaleX - 1
-        this.node.y = this.orgY
+        //cc.log('往左弹' + this.node.x + " " + crashLeft)
+        this.toward(0)
+        //cc.log('往左弹---' + this.node.x + " " + crashLeft)
+        //this.node.x = crashLeft - this.node.width * Math.abs(this.node.scaleX) / 2 - 1
+        //this.node.y = this.orgY
         //this.vHorz = Math.max(this.vHorz - this.gameManager.BOUNCE_OFF, 0)
-        this.vHorz *= -0.5
-        this.rushNode.active = false
+        this.vHorz = -0.5 * Math.abs(this.vHorz)
+        //this.rushNode.active = false
     },
 
     update (dt) 
     {
         this.orgX = this.node.x
         this.orgY = this.node.y
+
 
         if(this.gameManager.getCurState() == State.STATE_STAY)
         {
@@ -140,9 +155,13 @@ cc.Class({
                 cc.audioEngine.playEffect(this.jumpAudio, false);
                 if(this.vVert >= _maxSpeed / 2)
                 {
-                    this.rushNode.active = true
+                    //this.rushNode.active = true
                     this.gameManager.showSpeedLine(true)
                 }
+                if(this.vHorz > 0)
+                    this.toward(1)
+                else
+                    this.toward(0)
                 cc.log('反弹时的速度值' + this.vVert)
             }
             return
@@ -186,7 +205,7 @@ cc.Class({
 
         if(sVert <= 0)
         {
-            this.rushNode.active = false
+            //this.rushNode.active = false
         }
 
         if(this.gameManager.getCurState() == State.STATE_DEAD)
@@ -208,11 +227,12 @@ cc.Class({
         }
 
         var sHorz = this.vHorz * dt
-
         this.node.x += sHorz
-        if(this.node.x < -screenWidth / 2)
+        //cc.log(this.node.x)
+        //cc.log(this.node.x + " " + (screenWidth / 2 - this.node.width * this.node.scaleX / 2) + " " + this.node.width)
+        if(this.node.x < -screenWidth / 2 + this.node.width * Math.abs(this.node.scaleX) / 2)
             this.right(-screenWidth / 2)
-        else if(this.node.x > screenWidth / 2 - this.node.width * this.node.scaleX)
+        else if(this.node.x > screenWidth / 2 - this.node.width * Math.abs(this.node.scaleX) / 2)
             this.left(screenWidth / 2)
     },  
 });

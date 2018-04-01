@@ -41,9 +41,9 @@ cc.Class({
     checkCrash(player)
     {
         var top1 = player.node.y
-        var right1 = player.node.x + 162//player.node.width * player.node.scaleX
+        var right1 = player.node.x + 45//player.node.width * player.node.scaleX
         var down1 = player.node.y - player.node.height
-        var left1 = player.node.x
+        var left1 = player.node.x - 45
         var top2 = this.node.y + this.node.height / 2
         var right2 = this.node.x + this.node.width / 2
         var down2 = this.node.y - this.node.height / 2
@@ -55,9 +55,9 @@ cc.Class({
         {
             cc.log('检测到碰撞了')
             top1 = player.orgY
-            right1 = player.orgX + player.node.width * player.node.scaleX
+            right1 = player.orgX + 45
             down1 = player.orgY - player.node.height
-            left1 = player.orgX
+            left1 = player.orgX - 45
             var top3 = this.orgY + this.node.height / 2
             var right3 = this.orgX + this.node.width / 2
             var down3 = this.orgY - this.node.height / 2

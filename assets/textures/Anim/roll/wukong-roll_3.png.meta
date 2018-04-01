@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "00d7f554-0dfd-48fb-abca-e9c610e96120",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "wukong-roll_3": {
+      "ver": "1.0.3",
+      "uuid": "1c096432-d246-4812-a879-e28e96788cbc",
+      "rawTextureUuid": "00d7f554-0dfd-48fb-abca-e9c610e96120",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -2.5,
+      "offsetY": 12,
+      "trimX": 13,
+      "trimY": 32,
+      "width": 137,
+      "height": 96,
+      "rawWidth": 168,
+      "rawHeight": 184,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

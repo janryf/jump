@@ -20,7 +20,7 @@
   },
   "packageName": "org.cocos2d.start_project",
   "privateKey": "",
-  "renderMode": "0",
+  "renderMode": "1",
   "startScene": "e82bccb4-0880-45f1-a2f5-6f5cf17ef49f",
   "title": "jump",
   "webOrientation": "auto",

@@ -43,9 +43,9 @@ cc.Class({
     checkCrash(player)
     {
         var top1 = player.node.y
-        var right1 = player.node.x + player.node.width * player.node.scaleX
+        var right1 = player.node.x + 45
         var down1 = player.node.y - player.node.height
-        var left1 = player.node.x
+        var left1 = player.node.x - 45
         var top2 = this.node.y + this.node.height / 2
         var right2 = this.node.x + this.node.width / 2
         var down2 = this.node.y - this.node.height / 2

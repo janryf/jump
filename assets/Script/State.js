@@ -39,6 +39,18 @@ export function enterState(gameManager, state)
             gameManager.lineNode.destroy()
             gameManager.lineNode = null
         }
+
+        if(gameManager.wechat == 1)
+        {
+            var kvDataList = new Array();
+            kvDataList.push({key:"score",value:"12321"});
+
+            wx.setUserCloudStorage({KVDataList:kvDataList,
+            success:new function(){console.log("成功")},
+            fail:new function(){console.log("失败")},
+            complete:new function(){console.log("完成")}
+            })
+        }
     }
     else if(state == STATE_MAIN_MENU)
     {

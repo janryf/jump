@@ -104,7 +104,7 @@ cc.Class({
             return 3
         if(right1 < left2)
             return 4
-        cc.log('碰撞：' + ' ' + top1 + ' ' + right1 + ' ' + down1 + ' ' + left1 + '|' + top2 + ' ' + right2 + ' ' + down2 + ' ' + left2)
+        console.log('碰撞：' + ' ' + top1 + ' ' + right1 + ' ' + down1 + ' ' + left1 + '|' + top2 + ' ' + right2 + ' ' + down2 + ' ' + left2)
         return 0
     }
 });

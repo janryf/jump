@@ -57,8 +57,8 @@ cc.Class({
     crashDetect(playerNode)
     {
         var angle = this.node.rotation * Math.PI / 180
-        var left = playerNode.x + playerNode.width / 2 - 50
-        var right = playerNode.x + playerNode.width / 2 + 50
+        var left = playerNode.x - 40
+        var right = playerNode.x + 40
         var top = playerNode.y
         var down = playerNode.y - playerNode.height
 
