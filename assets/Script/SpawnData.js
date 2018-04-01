@@ -3,7 +3,7 @@ export var enemyGroups = [
     //0组 木板中静止
       [
         {
-            name: 'block',
+            name: 'rulai',
             x: 0,
             y: 350,
             vSpeed : -100,
@@ -14,22 +14,22 @@ export var enemyGroups = [
    //1组 木板右边静止
      [
         {
-            name: 'block',
+            name: 'hulu',
             x: 400,
             y: 350,
             vSpeed : 0,
-            hSpeed : 0,
+            hSpeed : 100,
             time : 0,
           },       
      ],
    //2组 木板左边静止
         [
          {
-            name: 'block',
+            name: 'hulu',
             x: -400,
             y: 350,
             vSpeed : 0,
-            hSpeed : 0,
+            hSpeed : -100,
             time : 0,
          },
         ],

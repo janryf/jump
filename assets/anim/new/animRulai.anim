@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "animRulai",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.06666666666666667,
+  "sample": 60,
+  "speed": 0.5,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "342fed77-2826-4fdc-b22f-4f899b0b92f8"
+            }
+          },
+          {
+            "frame": 0.016666666666666666,
+            "value": {
+              "__uuid__": "236a9267-2d16-45eb-851e-6c6504821a6e"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "aec0f1ce-692e-44ff-ab9d-2c3146d656b3"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "342fed77-2826-4fdc-b22f-4f899b0b92f8"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

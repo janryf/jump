@@ -65,19 +65,19 @@ cc.Class({
     },
 
     //判断两个矩形的位置关系，返回0表示相交，1表示1在2上方，2表示1在2右方，3表示1在2下方，4表示1在2左方。有可能出现类似左上的情况，但这里只需要校验一种就行了
-    calcPosRelation(top1, right1, down1, left1, top2, right2, down2, left2)
+    calcPosRelation(top1, right1, bottom1, left1, top2, right2, bottom2, left2)
     {
         if(this.gameManager.getCurState() != State.STATE_NORMAL)
             return -1
-        if(down1 > top2)
+        if(bottom1 > top2)
             return 1
         if(left1 > right2)
             return 2
-        if(top1 < down2)
+        if(top1 < bottom2)
             return 3
         if(right1 < left2)
             return 4
-        console.log('碰撞：' + ' ' + top1 + ' ' + right1 + ' ' + down1 + ' ' + left1 + '|' + top2 + ' ' + right2 + ' ' + down2 + ' ' + left2)
+        console.log('碰撞：' + ' ' + top1 + ' ' + right1 + ' ' + bottom1 + ' ' + left1 + '|' + top2 + ' ' + right2 + ' ' + bottom2 + ' ' + left2)
         return 0
     }
 });

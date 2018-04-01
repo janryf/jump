@@ -83,24 +83,27 @@ cc.Class({
             default : null,
             type : cc.Prefab,
         },
-        enemyPref : {
+        enemyCloudPref : {
             default : null,
             type : cc.Prefab,
         },
-        ufoPref : {
+        enemyTangPref : {
             default : null,
             type : cc.Prefab,
         },
-        heliPref : {
+        enemyRulaiPref : {
             default : null,
             type : cc.Prefab,
         },
+        enemyHuluPref : {
+            default : null,
+            type : cc.Prefab,
+        },        
         bgPrefs : [cc.Prefab],
         stickPref : {
             default : null,
             type : cc.Prefab,
-        },
-        //--------------------------------
+        },//--------------------------------
 
         speedLineNode : {
             default : null,
@@ -262,12 +265,14 @@ cc.Class({
                 {
                     var enemyInfo = enemyGroup[i]
                     var enemy = null
-                    if(enemyInfo.name == 'block')
-                        enemy = cc.instantiate(this.enemyPref)
-                    else if(enemyInfo.name == 'ufo')
-                        enemy = cc.instantiate(this.ufoPref)
-                    else if(enemyInfo.name == 'heli')
-                        enemy = cc.instantiate(this.heliPref)
+                    if(enemyInfo.name == 'cloud')
+                        enemy = cc.instantiate(this.enemyCloudPref)
+                    else if(enemyInfo.name == 'tang')
+                        enemy = cc.instantiate(this.enemyTangPref)
+                    else if(enemyInfo.name == 'rulai')
+                        enemy = cc.instantiate(this.enemyRulaiPref)
+                    else if(enemyInfo.name == 'hulu')
+                        enemy = cc.instantiate(this.enemyHuluPref)
                     this.enemyGroupNode.addChild(enemy)
                     //this.node.getParent().addChild(enemy)
                     enemy.getComponent("Enemy").setEnemyData(this, enemyInfo.x, enemyInfo.y + 1000, enemyInfo.vSpeed, enemyInfo.hSpeed)
@@ -400,7 +405,7 @@ cc.Class({
                 }
                 else if(ret.result == 3)//向下
                 {
-                    player.down(ret.down)
+                    player.down(ret.bottom)
                 }
                 else if(ret.result == 4)//向左
                 {
