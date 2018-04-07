@@ -3,7 +3,7 @@
   "_name": "animHulu",
   "_objFlags": 0,
   "_rawFiles": null,
-  "_duration": 0.1,
+  "_duration": 0.15,
   "sample": 60,
   "speed": 0.2,
   "wrapMode": 2,
@@ -14,37 +14,55 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "9f09399c-74b9-445b-8747-fbb67b485062"
+              "__uuid__": "e2242885-2079-4e0d-94cd-e1cd0f9db76f"
             }
           },
           {
             "frame": 0.016666666666666666,
             "value": {
-              "__uuid__": "aee4b69c-51f9-4cdf-be13-e3c09d8f09ee"
+              "__uuid__": "049ffda0-a999-47db-b646-51ff323e9d82"
             }
           },
           {
             "frame": 0.03333333333333333,
             "value": {
-              "__uuid__": "5b6828a6-5cce-4ec6-9b75-c6d70b774caf"
+              "__uuid__": "14776420-0a22-450a-9f1a-45dc72d092d4"
             }
           },
           {
             "frame": 0.05,
             "value": {
-              "__uuid__": "5b6828a6-5cce-4ec6-9b75-c6d70b774caf"
+              "__uuid__": "5ab40a8a-f79c-4ce2-a18d-c6331e5f900d"
             }
           },
           {
             "frame": 0.06666666666666667,
             "value": {
-              "__uuid__": "5b6828a6-5cce-4ec6-9b75-c6d70b774caf"
+              "__uuid__": "f4c33de7-1ebe-418e-9eba-474c5a4f4f62"
             }
           },
           {
             "frame": 0.08333333333333333,
             "value": {
-              "__uuid__": "9f09399c-74b9-445b-8747-fbb67b485062"
+              "__uuid__": "c0b2db31-1296-4233-a9bf-b73e79738c0b"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "52e9e329-9222-4907-accd-7abc76a72e2c"
+            }
+          },
+          {
+            "frame": 0.11666666666666667,
+            "value": {
+              "__uuid__": "1ecb9285-71d4-4ea1-af87-13201b614c58"
+            }
+          },
+          {
+            "frame": 0.13333333333333333,
+            "value": {
+              "__uuid__": "d9146d0c-2843-465d-80ae-c89cf38cebf6"
             }
           }
         ]

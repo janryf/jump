@@ -46,7 +46,7 @@ cc.Class({
         //console.log(this.startPos.x + ' ' + this.startPos.y)
         this.gameManager.setLineNode(cc.instantiate(this.stickStraight))
         this.gameManager.getLineNode().setPosition(this.startPos.x - 540, this.startPos.y - 960)
-        this.node.getParent().addChild(this.gameManager.getLineNode())
+        this.gameManager.node.getParent().addChild(this.gameManager.getLineNode())
         this.gameManager.getLineNode().width = this.gameManager.LINE_LENGTH_MIN//给最小长度
         this.gameManager.getLineNode().getComponent('Line').gameManager = this.gameManager
 

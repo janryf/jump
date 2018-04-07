@@ -72,7 +72,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "ecbe05fc-b866-4d9d-a823-a4eadf2f139d"
+      "__uuid__": "6de30a20-aaae-4b0c-aa9c-0fb3f487eb5d"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -99,7 +99,6 @@
     "_enabled": true,
     "startPos": 0,
     "stickStraight": null,
-    "gameManagerNode": null,
     "gameManager": null
   },
   {

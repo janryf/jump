@@ -1,0 +1,61 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "animRoll",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.1,
+  "sample": 60,
+  "speed": 0.2,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "9c8e85bf-de78-4f43-a6e1-7a75066a9504"
+            }
+          },
+          {
+            "frame": 0.016666666666666666,
+            "value": {
+              "__uuid__": "75e63bc5-9cdd-4791-aed1-9eb16f995c48"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "1c096432-d246-4812-a879-e28e96788cbc"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "60ceeb61-4f4c-4160-9a3f-0c544ce2bdaf"
+            }
+          },
+          {
+            "frame": 0.06666666666666667,
+            "value": {
+              "__uuid__": "85d7fa54-9fa3-4b01-ac69-e3bea7e27a42"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "54b9d997-6963-4122-84b7-50671ca9cdcd"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.1,
+      "func": "onRollEnd",
+      "params": []
+    }
+  ]
+}

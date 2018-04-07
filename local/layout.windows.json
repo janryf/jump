@@ -48,7 +48,7 @@
                 "width": 944
               },
               {
-                "active": 0,
+                "active": 1,
                 "children": [
                   "console",
                   "timeline"
@@ -83,6 +83,30 @@
         "assets",
         "scene",
         "timeline"
+      ]
+    },
+    "window-1523084831139": {
+      "main": false,
+      "url": "unpack://static/window.html",
+      "windowType": "dockable",
+      "x": 552,
+      "y": 190,
+      "width": 516,
+      "height": 538,
+      "layout": {
+        "type": "dock-v",
+        "children": [
+          {
+            "type": "panel",
+            "active": 0,
+            "children": [
+              "sprite-editor"
+            ]
+          }
+        ]
+      },
+      "panels": [
+        "sprite-editor"
       ]
     }
   },

@@ -33,6 +33,10 @@ cc.Class({
             default : null,
             type : cc.Node , 
         },
+        tallNode : {
+            default : null,
+            type : cc.Node , 
+        },
     },
 
     onLoad ()
@@ -46,6 +50,8 @@ cc.Class({
         this.restart()
         this.rushNode.getComponent(cc.Animation).play('rushAnim')
         this.rushNode.active = false
+        this.tallNode.getComponent(cc.Animation).play('rushAnim')
+        this.tallNode.active = false
     },
 
     //0为左边，1为右边
@@ -119,6 +125,8 @@ cc.Class({
         if(this.vHorz < 200)
             this.vHorz = 200
         this.rushNode.active = false
+        this.tallNode.active = false
+        this.getComponent(cc.Animation).play('animRoll')
     },
 
     down(isEnemy)
@@ -144,6 +152,16 @@ cc.Class({
         if(this.vHorz > -200)
             this.vHorz = -200
         this.rushNode.active = false
+        this.tallNode.active = false
+        this.getComponent(cc.Animation).play('animRoll')
+    },
+
+    onRollEnd()
+    {
+        if(this.vVert > 0)
+            this.getComponent(cc.Animation).play('animJump')
+        else
+            this.getComponent(cc.Animation).play('animFall')
     },
 
     update (dt) 
@@ -165,6 +183,10 @@ cc.Class({
                 {
                     this.rushNode.active = true
                     this.gameManager.showSpeedLine(true)
+                }
+                if(this.vVert >= _maxSpeed * 0.8)
+                {
+                    this.tallNode.active = true
                 }
                 if(this.vHorz > 0)
                     this.toward(1)
@@ -196,7 +218,7 @@ cc.Class({
         if(orgVVert > 0 && this.vVert <= 0)
             if(!this.gameManager.getCurState != State.STATE_STAY)
             {
-                this.getComponent(cc.Animation).play('animFall')
+                this.getComponent(cc.Animation).play('animRoll')
                 this.gameManager.showSpeedLine(false)
             }
 
@@ -215,6 +237,7 @@ cc.Class({
         if(sVert <= 0)
         {
             this.rushNode.active = false
+            this.tallNode.active = false
         }
 
         if(this.gameManager.getCurState() == State.STATE_DEAD)
