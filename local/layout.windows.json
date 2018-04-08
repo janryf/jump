@@ -8,7 +8,7 @@
       "x": -8,
       "y": -8,
       "width": 1936,
-      "height": 1056,
+      "height": 1066,
       "layout": {
         "children": [
           {
@@ -18,7 +18,7 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 471.984375,
+                "height": 476.984375,
                 "type": "panel",
                 "width": 311
               },
@@ -27,12 +27,12 @@
                 "children": [
                   "assets"
                 ],
-                "height": 454,
+                "height": 459,
                 "type": "panel",
                 "width": 311
               }
             ],
-            "height": 929,
+            "height": 939,
             "type": "dock-v",
             "width": 311
           },
@@ -43,7 +43,7 @@
                 "children": [
                   "scene"
                 ],
-                "height": 543.984375,
+                "height": 550,
                 "type": "panel",
                 "width": 1133.984375
               },
@@ -53,12 +53,12 @@
                   "console",
                   "timeline"
                 ],
-                "height": 382,
+                "height": 386,
                 "type": "panel",
                 "width": 1133.984375
               }
             ],
-            "height": 929,
+            "height": 939,
             "type": "dock-v",
             "width": 1133.984375
           },
@@ -68,7 +68,7 @@
               "inspector",
               "node-library"
             ],
-            "height": 929,
+            "height": 939,
             "type": "panel",
             "width": 463
           }
@@ -84,7 +84,8 @@
         "scene",
         "timeline"
       ]
-    }
+    },
+    "window-1523196841632": {}
   },
   "panels": {
     "sprite-editor": {
@@ -95,9 +96,9 @@
     },
     "builder": {
       "x": 744,
-      "y": 82,
-      "width": 515,
-      "height": 737
+      "y": 87,
+      "width": 513,
+      "height": 730
     },
     "project-settings": {
       "x": 774,

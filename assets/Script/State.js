@@ -44,13 +44,15 @@ export function enterState(gameManager, state)
 
         if(gameManager.wechat == 1)
         {
+
+            
             var kvDataList = new Array();
-            kvDataList.push({key:"score",value:"12321"});
+            kvDataList.push({key:"highestScore",value:"12321"});
 
             wx.setUserCloudStorage({KVDataList:kvDataList,
-            success:new function(){console.log("成功")},
-            fail:new function(){console.log("失败")},
-            complete:new function(){console.log("完成")}
+            success:function(){console.log("成功")},
+            fail:function(){console.log("失败")},
+            complete:function(){console.log("完成")}
             })
         }
     }

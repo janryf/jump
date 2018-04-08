@@ -35,6 +35,10 @@ cc.Class({
             default : null,
             type : cc.Node,
         },
+        openNode :{
+            default : null,
+            type : cc.Node,
+        },
         score : 0,
         curLevel : 1,
         beginChangeBK : false,
