@@ -28,8 +28,7 @@ export function enterState(gameManager, state)
     }
     else if(state == STATE_DEAD)
     {
-        cc.audioEngine.stop(gameManager.bkMusic)
-        cc.audioEngine.play(gameManager.audioGameover)
+        gameManager.playSound('over')
         gameManager.logicSpeed = 0
         gameManager.playerNode.getComponent('Player').vHorz = 0
         gameManager.playerNode.getComponent('Player').vVert = 0

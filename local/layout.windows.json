@@ -7,8 +7,8 @@
       "windowType": "dockable",
       "x": -8,
       "y": -8,
-      "width": 1616,
-      "height": 886,
+      "width": 1936,
+      "height": 1056,
       "layout": {
         "children": [
           {
@@ -18,23 +18,23 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 385,
+                "height": 471.984375,
                 "type": "panel",
-                "width": 259
+                "width": 311
               },
               {
                 "active": 0,
                 "children": [
                   "assets"
                 ],
-                "height": 371,
+                "height": 454,
                 "type": "panel",
-                "width": 259
+                "width": 311
               }
             ],
-            "height": 759,
+            "height": 929,
             "type": "dock-v",
-            "width": 259
+            "width": 311
           },
           {
             "children": [
@@ -43,9 +43,9 @@
                 "children": [
                   "scene"
                 ],
-                "height": 444,
+                "height": 543.984375,
                 "type": "panel",
-                "width": 944
+                "width": 1133.984375
               },
               {
                 "active": 1,
@@ -53,14 +53,14 @@
                   "console",
                   "timeline"
                 ],
-                "height": 312,
+                "height": 382,
                 "type": "panel",
-                "width": 944
+                "width": 1133.984375
               }
             ],
-            "height": 759,
+            "height": 929,
             "type": "dock-v",
-            "width": 944
+            "width": 1133.984375
           },
           {
             "active": 0,
@@ -68,9 +68,9 @@
               "inspector",
               "node-library"
             ],
-            "height": 759,
+            "height": 929,
             "type": "panel",
-            "width": 385
+            "width": 463
           }
         ],
         "type": "dock-h"
@@ -83,30 +83,6 @@
         "assets",
         "scene",
         "timeline"
-      ]
-    },
-    "window-1523084831139": {
-      "main": false,
-      "url": "unpack://static/window.html",
-      "windowType": "dockable",
-      "x": 552,
-      "y": 190,
-      "width": 516,
-      "height": 538,
-      "layout": {
-        "type": "dock-v",
-        "children": [
-          {
-            "type": "panel",
-            "active": 0,
-            "children": [
-              "sprite-editor"
-            ]
-          }
-        ]
-      },
-      "panels": [
-        "sprite-editor"
       ]
     }
   },

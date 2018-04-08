@@ -1,6 +1,7 @@
 var GameManager = require('GameManager')
 var Enemy = require('Enemy')
 var State = require('State')
+var Config = require('Config')
 
 var _bakVVert = 0
 var _bakVHorz = 0
@@ -8,19 +9,9 @@ var _maxSpeed = 0
 
 cc.Class({
     extends: cc.Component,
-
     properties: {
-        jumpHeight : 0,
-        jumpDuration : 0,
-        maxMoveSpeed : 0,
-        accel : 0,
         vVert : 0,
         vHorz : 6,
-        bmouse : false,
-        gameManagerNode : {
-            default : null,
-            type : cc.Node , 
-        },
         gameManager : null,
         stayTimeout : 0.7,
         jumpAudio: {
@@ -37,6 +28,7 @@ cc.Class({
             default : null,
             type : cc.Node , 
         },
+        rollTimeout : 2,
     },
 
     onLoad ()
@@ -46,12 +38,13 @@ cc.Class({
     start () {
         //this.vVert = -6
         this.node.on('touchstart', this.onMouseDown.bind(this))
-        this.gameManager = this.gameManagerNode.getComponent('GameManager')
+        this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
         this.restart()
         this.rushNode.getComponent(cc.Animation).play('rushAnim')
         this.rushNode.active = false
         this.tallNode.getComponent(cc.Animation).play('rushAnim')
         this.tallNode.active = false
+        this.rollTimeout = 1
     },
 
     //0为左边，1为右边
@@ -100,7 +93,7 @@ cc.Class({
         this.vVert = 0
         this.vHorz = 0
         this.gameManager.setLogicSpeed(0)
-        this.stayTimeout = this.gameManager.STAY_TIME
+        this.stayTimeout = Config.STAY_TIME
         this.getComponent(cc.Animation).play('animStay')
     },
 
@@ -109,30 +102,33 @@ cc.Class({
         //this.node.x = this.orgX
         //this.node.y = crashUp + this.node.height * this.node.scaleY + 1
         if(isEnemy)
-            cc.audioEngine.playEffect(this.gameManager.audioCrash, false);
+            this.gameManager.playSound('crash')
         this.vVert = Math.abs(this.vVert)
     },
 
     right(isEnemy)
     {
         if(isEnemy)
-            cc.audioEngine.playEffect(this.gameManager.audioCrash, false);
+            this.gameManager.playSound('crash')
         this.toward(1)
         //this.node.x = crashRight + 1
         //this.node.y = this.orgY
-        //this.vHorz = Math.min(this.vHorz + this.gameManager.BOUNCE_OFF, 0)
         this.vHorz = 0.5 * Math.abs(this.vHorz)
         if(this.vHorz < 200)
             this.vHorz = 200
         this.rushNode.active = false
         this.tallNode.active = false
-        this.getComponent(cc.Animation).play('animRoll')
+        if(this.rollTimeout <= 0)
+        {
+            this.getComponent(cc.Animation).play('animRoll')
+            this.rollTimeout = 1
+        }
     },
 
     down(isEnemy)
     {
         if(isEnemy)
-            cc.audioEngine.playEffect(this.gameManager.audioCrash, false);
+            this.gameManager.playSound('crash')
         this.vVert = -0.1 * Math.abs(this.vVert)
         this.getComponent(cc.Animation).play('animFall')
         this.gameManager.showSpeedLine(false)
@@ -141,19 +137,22 @@ cc.Class({
     left(isEnemy)
     {
         if(isEnemy)
-            cc.audioEngine.playEffect(this.gameManager.audioCrash, false);
+            this.gameManager.playSound('crash')
         //cc.log('往左弹' + this.node.x + " " + crashLeft)
         this.toward(0)
         //cc.log('往左弹---' + this.node.x + " " + crashLeft)
         //this.node.x = crashLeft - this.node.width * Math.abs(this.node.scaleX) / 2 - 1
         //this.node.y = this.orgY
-        //this.vHorz = Math.max(this.vHorz - this.gameManager.BOUNCE_OFF, 0)
         this.vHorz = -0.5 * Math.abs(this.vHorz)
         if(this.vHorz > -200)
             this.vHorz = -200
         this.rushNode.active = false
         this.tallNode.active = false
-        this.getComponent(cc.Animation).play('animRoll')
+        if(this.rollTimeout <= 0)
+        {
+            this.getComponent(cc.Animation).play('animRoll')
+            this.rollTimeout = 1
+        }
     },
 
     onRollEnd()
@@ -168,6 +167,8 @@ cc.Class({
     {
         this.orgX = this.node.x
         this.orgY = this.node.y
+        if(this.rollTimeout > 0)
+            this.rollTimeout -= dt
 
         if(this.gameManager.getCurState() == State.STATE_STAY)//处理停留状态
         {
@@ -178,7 +179,7 @@ cc.Class({
                 this.vVert = _bakVVert
                 this.vHorz = _bakVHorz
                 this.getComponent(cc.Animation).play('animJump')
-                cc.audioEngine.playEffect(this.gameManager.audioJump, false);
+                this.gameManager.playSound('jump')
                 if(this.vVert >= _maxSpeed / 2)
                 {
                     this.rushNode.active = true
@@ -209,16 +210,20 @@ cc.Class({
         dt /= timeValue
         //cc.log(-screenHeight / 2 + " " + this.node.y + '时间' + timeValue)
 
-        var sVert = this.vVert * dt - this.gameManager.GRAVITY / 2 * dt * dt
+        var sVert = this.vVert * dt - Config.GRAVITY / 2 * dt * dt
         //cc.log(sVert)
         var orgY = this.node.y
         var orgVVert = this.vVert
-        this.vVert += -this.gameManager.GRAVITY * dt
+        this.vVert += -Config.GRAVITY * dt
         //cc.log("速度" + this.vVert)
         if(orgVVert > 0 && this.vVert <= 0)
             if(!this.gameManager.getCurState != State.STATE_STAY)
             {
-                this.getComponent(cc.Animation).play('animRoll')
+                if(this.rollTimeout <= 0)
+                {
+                    this.getComponent(cc.Animation).play('animRoll')
+                    this.rollTimeout = 1
+                }
                 this.gameManager.showSpeedLine(false)
             }
 

@@ -13,6 +13,11 @@ cc.Class({
     timeout : 0,
     crashFlag : false,
 
+    onLoad()
+    {
+        this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
+    },
+
     start () 
     {
         this.timeout = 0
@@ -21,9 +26,8 @@ cc.Class({
         this.crashFlag = false
     },
 
-    setEnemyData(gameManager, x, y, vSpeed, hSpeed)
+    setEnemyData(x, y, vSpeed, hSpeed)
     {
-        this.gameManager = gameManager
         this.node.x = x
         this.node.y = y
         this.vSpeed = vSpeed
@@ -38,6 +42,11 @@ cc.Class({
         if(this.gameManager != null && this.gameManager.logicSpeed > 0)//随着屏幕滚动而出现，下落速度要比屏幕滚动速度更快
         {
             this.node.y -= this.gameManager.logicSpeed * 1.8
+            if(this.node.y < -1000)
+            {
+                this.node.destroy()
+                this.gameManager.removeEnemy(this.node)
+            }
         }
         if(this.timeout >= 0)
         {

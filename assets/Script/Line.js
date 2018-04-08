@@ -35,10 +35,10 @@ cc.Class({
 
     onLoad () 
     {
+        this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
     },
 
     start () {
-
     },
 
     disableLine()

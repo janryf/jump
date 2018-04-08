@@ -1,6 +1,7 @@
 //用来表示背景，最重要的功能是滚动和在上面画出反弹线
 var Line = require('Line')
 var State = require('State')
+var Config = require('Config')
 
 cc.Class({
     extends: cc.Component,
@@ -14,26 +15,31 @@ cc.Class({
         gameManager : null,
     },
 
+    onLoad()
+    {
+        this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
+    },
+
     start () 
     {
         this.node.on('touchstart', this.touchStart.bind(this))
         this.node.on('touchmove', this.touchMove.bind(this))
     },
 
-    initData(gameManager, stickPref)
+    initData(stickPref)
     {
-        this.gameManager = gameManager
         this.stickStraight = stickPref
     },
 
     touchStart(event)
     {
+        cc.log("touchStart " + this.gameManager)
         if(this.gameManager.getCurState() != State.STATE_NORMAL && this.gameManager.getCurState() != State.STATE_MAIN_MENU)
             return
 
         if(this.gameManager.getCurState() == State.STATE_MAIN_MENU)
         {
-            this.gameManager.bkMusic = cc.audioEngine.play(this.gameManager.audioBk, true);
+            this.gameManager.playSound('bk')
             this.gameManager.enterState(State.STATE_NORMAL)
         }
 
@@ -47,8 +53,7 @@ cc.Class({
         this.gameManager.setLineNode(cc.instantiate(this.stickStraight))
         this.gameManager.getLineNode().setPosition(this.startPos.x - 540, this.startPos.y - 960)
         this.gameManager.node.getParent().addChild(this.gameManager.getLineNode())
-        this.gameManager.getLineNode().width = this.gameManager.LINE_LENGTH_MIN//给最小长度
-        this.gameManager.getLineNode().getComponent('Line').gameManager = this.gameManager
+        this.gameManager.getLineNode().width = Config.LINE_LENGTH_MIN//给最小长度
 
         //if(this.gameManager.lineNode != null)
           //  this.gameManager.lineNode.destroy()
@@ -67,10 +72,10 @@ cc.Class({
         var angle = cc.pToAngle(posSub) / Math.PI * 180  
         this.gameManager.lineNode.rotation = -angle
         var distance = cc.pDistance(this.startPos, pos)
-        if(distance < this.gameManager.LINE_LENGTH_MIN)
-            distance = this.gameManager.LINE_LENGTH_MIN
-        if(distance > this.gameManager.LINE_LENGTH_MAX)
-            distance = this.gameManager.LINE_LENGTH_MAX
+        if(distance < Config.LINE_LENGTH_MIN)
+            distance = Config.LINE_LENGTH_MIN
+        if(distance > Config.LINE_LENGTH_MAX)
+            distance = Config.LINE_LENGTH_MAX
         this.gameManager.lineNode.width = distance
         //cc.log("角度" + -angle)
     },

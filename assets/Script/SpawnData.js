@@ -1,4 +1,4 @@
-export var enemyGroups = [
+var enemyGroups = [
 
     //0组 云中静止
       [
@@ -481,7 +481,7 @@ export var enemyGroups = [
 
 ]
 
-export var levels = [
+var levels = [
 //第一级别
 {
     milesMax: 50,

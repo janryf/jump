@@ -6,6 +6,8 @@ var EnemyBlock = require('EnemyBlock')
 var SpawnData = require('SpawnData')
 var State = require('State')
 var ground = require('ground')
+var Config = require('Config')
+var AudioMgr = require('AudioMgr')
 
 cc.Class({
     extends: cc.Component,
@@ -24,17 +26,6 @@ cc.Class({
             default : null,
             type : cc.Node,
         },
-
-        //-------- 配置项，全大写加下划线命名 ------------ 2304 192
-        LINE_LENGTH_MAX : 180,//绳子的最大长度
-        LINE_LENGTH_MIN : 35,//绳子的最小长度
-        LEVELS : [cc.Integer],
-        GRAVITY : 6,//重力系数
-        STAY_TIME : 0.4,//在绳子上停留的时间
-        SPEED_A : 0,
-        SPEED_B : 0,
-        SPEED_C : 0,
-        BOUNCE_OFF : 1,//------------------------------
         
         playerNode :{
             default : null,
@@ -82,61 +73,6 @@ cc.Class({
             type : cc.Node,
         },//-------------------------
 
-        //----------- prefab --------------
-        audioBk: {
-            default: null,
-            url: cc.AudioClip
-        },
-        audioCrash: {
-            default: null,
-            url: cc.AudioClip
-        },
-        audioGameover: {
-            default: null,
-            url: cc.AudioClip
-        },
-        audioJump: {
-            default: null,
-            url: cc.AudioClip
-        },
-        audioPerfect: {
-            default: null,
-            url: cc.AudioClip
-        },
-        audioDead: {
-            default: null,
-            url: cc.AudioClip
-        },
-        effectCrash:{
-            default: null,
-            type : cc.Prefab,
-        },
-        stickBend : {
-            default : null,
-            type : cc.Prefab,
-        },
-        enemyCloudPref : {
-            default : null,
-            type : cc.Prefab,
-        },
-        enemyTangPref : {
-            default : null,
-            type : cc.Prefab,
-        },
-        enemyRulaiPref : {
-            default : null,
-            type : cc.Prefab,
-        },
-        enemyHuluPref : {
-            default : null,
-            type : cc.Prefab,
-        },        
-        bgPrefs : [cc.Prefab],
-        stickPref : {
-            default : null,
-            type : cc.Prefab,
-        },//--------------------------------
-
         speedLineNode : {
             default : null,
             type : cc.Node,
@@ -146,14 +82,15 @@ cc.Class({
             default : null,
             type : cc.Node,
         },
-
+        foregrounds : [],
+        foregroundBuffer : 0,
         enemys : [],
+        config : null,
     },
     logicSpeed : 0,//游戏的逻辑速度，影响得分和背景等滚动速度
     enemyTimeout : 0,// 
     curState : 0, 
     wechat : 0,
-    bkMusic : 0,
     bPlayMusic : 0,
 
     setLogicSpeed(logicSpeed)
@@ -166,6 +103,7 @@ cc.Class({
         this.curState = -1
         this.wechat = 0
         this.bPlayMusic = true
+        this.config = this.getComponent('Config')
     },
 
     showSpeedLine(bPlay)
@@ -192,13 +130,13 @@ cc.Class({
         this.enemyTimeout = 2
         this.enterState(State.STATE_MAIN_MENU)
 
-        this.background1 = cc.instantiate(this.bgPrefs[0])
-        this.background1.getComponent('ground').initData(this, this.stickPref)
+        this.background1 = cc.instantiate(this.config.bgPrefs[0])
+        this.background1.getComponent('ground').initData(this.config.stickPref)
         this.background.addChild(this.background1)
         this.background1.x = 0
         this.background1.y = 192
-        this.background2 = cc.instantiate(this.bgPrefs[1])
-        this.background2.getComponent('ground').initData(this, this.stickPref)
+        this.background2 = cc.instantiate(this.config.bgPrefs[1])
+        this.background2.getComponent('ground').initData(this.config.stickPref)
         this.background.addChild(this.background2)
         this.background2.x = 0
         this.background2.y = 192 + 2304
@@ -206,8 +144,7 @@ cc.Class({
 
     restart()
     {
-        cc.audioEngine.stop(this.bkMusic)
-        this.bkMusic = cc.audioEngine.play(this.audioBk, true)
+        this.playSound('bk')
         this.enterState(State.STATE_NORMAL)
         var player = this.playerNode.getComponent('Player')
         player.restart()
@@ -228,13 +165,13 @@ cc.Class({
             })
         }
 
-        this.background1 = cc.instantiate(this.bgPrefs[0])
-        this.background1.getComponent('ground').initData(this, this.stickPref)
+        this.background1 = cc.instantiate(this.config.bgPrefs[0])
+        this.background1.getComponent('ground').initData(this.config.stickPref)
         this.background.addChild(this.background1)
         this.background1.x = 0
         this.background1.y = 192
-        this.background2 = cc.instantiate(this.bgPrefs[1])
-        this.background2.getComponent('ground').initData(this, this.stickPref)
+        this.background2 = cc.instantiate(this.config.bgPrefs[1])
+        this.background2.getComponent('ground').initData(this.config.stickPref)
         this.background.addChild(this.background2)
         this.background2.x = 0
         this.background2.y = 192 + 2304
@@ -250,6 +187,20 @@ cc.Class({
     getCurState()
     {
         return this.curState
+    },
+
+    playSound(soundStr)
+    {
+        if(soundStr == 'bk')
+            AudioMgr.playBkMusic(this.config.audioBk, true)
+        else if(soundStr == 'over')
+            AudioMgr.playBkMusic(this.config.audioGameover, false)
+        else if(soundStr == 'crash')
+            AudioMgr.playSound(this.config.audioCrash)
+        else if(soundStr == 'dead')
+            AudioMgr.playSound(this.config.audioDead)
+        else if(soundStr == 'jump')
+            AudioMgr.playSound(this.config.audioJump)
     },
 
     setLineNode(line)
@@ -275,6 +226,30 @@ cc.Class({
         return Math.floor(Math.random() * (upperValue - lowerValue + 1) + lowerValue);
     },
 
+    removeEnemy(enemy)
+    {
+        for(var i = 0; i < this.enemys.length; i++)
+        {
+            if(this.enemys[i] == enemy)
+            {
+                this.enemys.splice(i, 1)
+                return
+            }
+        }
+    },
+
+    removeFore(fore)
+    {
+        for(var i = 0; i < this.foregrounds.length; i++)
+        {
+            if(this.foregrounds[i] == fore)
+            {
+                this.foregrounds.splice(i, 1)
+                return
+            }
+        }
+    },
+
     update (dt) 
     {
         //cc.log(this.background1.x + " " + this.background.x)
@@ -289,6 +264,18 @@ cc.Class({
         
         if(this.logicSpeed > 0)//逻辑速度影响背景卷动和计分
         {
+            this.foregroundBuffer -= this.logicSpeed
+            if(this.foregroundBuffer <= 0)
+            {
+                this.foregroundBuffer = this.randomFrom(150, 300)
+                var random = this.randomFrom(0, this.config.forePrefs.length - 1)
+                var fore = cc.instantiate(this.config.forePrefs[random])
+                fore.x = this.randomFrom(-540, 540)
+                fore.y = 1010
+                this.background.addChild(fore)
+                this.foregrounds.push(fore)
+            }
+
             this.background1.y -= this.logicSpeed
             this.background2.y -= this.logicSpeed
             this.score += this.logicSpeed / 200
@@ -304,16 +291,16 @@ cc.Class({
                     var enemyInfo = enemyGroup[i]
                     var enemy = null
                     if(enemyInfo.name == 'cloud')
-                        enemy = cc.instantiate(this.enemyCloudPref)
+                        enemy = cc.instantiate(this.config.enemyCloudPref)
                     else if(enemyInfo.name == 'tang')
-                        enemy = cc.instantiate(this.enemyTangPref)
+                        enemy = cc.instantiate(this.config.enemyTangPref)
                     else if(enemyInfo.name == 'rulai')
-                        enemy = cc.instantiate(this.enemyRulaiPref)
+                        enemy = cc.instantiate(this.config.enemyRulaiPref)
                     else if(enemyInfo.name == 'hulu')
-                        enemy = cc.instantiate(this.enemyHuluPref)
+                        enemy = cc.instantiate(this.config.enemyHuluPref)
                     this.enemyGroupNode.addChild(enemy)
                     //this.node.getParent().addChild(enemy)
-                    enemy.getComponent("Enemy").setEnemyData(this, enemyInfo.x, enemyInfo.y + 1000, enemyInfo.vSpeed, enemyInfo.hSpeed)
+                    enemy.getComponent("Enemy").setEnemyData(enemyInfo.x, enemyInfo.y + 1000, enemyInfo.vSpeed, enemyInfo.hSpeed)
                     this.enemys.push(enemy)
                 }
             }
@@ -323,9 +310,9 @@ cc.Class({
         
         //滚动背景
         var actualLevel = 0
-        for(var i = this.LEVELS.length - 1; i >= 0; i--)
+        for(var i = Config.LEVELS.length - 1; i >= 0; i--)
         {
-            if(this.score >= this.LEVELS[i])
+            if(this.score >= Config.LEVELS[i])
             {
                 actualLevel = i + 1
                 break
@@ -337,12 +324,12 @@ cc.Class({
             if(this.background2.y < 192)
             {
                 var targetBkIndex = (actualLevel - 1) * 2
-                if(this.background1.name != this.bgPrefs[targetBkIndex].name)
+                if(this.background1.name != this.config.bgPrefs[targetBkIndex].name)
                 {
                     this.beginChangeBK = true
                     this.background1.destroy()
-                    this.background1 = cc.instantiate(this.bgPrefs[(actualLevel - 1) * 2])
-                    this.background1.getComponent('ground').initData(this, this.stickPref)
+                    this.background1 = cc.instantiate(this.config.bgPrefs[(actualLevel - 1) * 2])
+                    this.background1.getComponent('ground').initData(this.config.stickPref)
                     this.background.addChild(this.background1)
                     this.background1.x = 0
                     this.background1.y = this.background2.y + 2304
@@ -352,8 +339,8 @@ cc.Class({
             {
                 this.beginChangeBK = false
                 this.background2.destroy()
-                this.background2 = cc.instantiate(this.bgPrefs[(actualLevel - 1) * 2 + 1])
-                this.background2.getComponent('ground').initData(this, this.stickPref)
+                this.background2 = cc.instantiate(this.config.bgPrefs[(actualLevel - 1) * 2 + 1])
+                this.background2.getComponent('ground').initData(this.config.stickPref)
                 this.background.addChild(this.background2)
                 this.background2.x = 0
                 this.background2.y = this.background1.y + 2304
@@ -391,7 +378,7 @@ cc.Class({
                 
                 var player = this.playerNode.getComponent('Player')
 
-                var speed = this.SPEED_A * this.score + this.SPEED_B / (this.lineNode.width + 240) - this.playerNode.y / this.SPEED_C
+                var speed = Config.SPEED_A * this.score + Config.SPEED_B / (this.lineNode.width + 240) - this.playerNode.y / Config.SPEED_C
                 cc.log("速度值" + speed)
                 //cc.log(this.lineNode.rotate)
                 var angle = this.lineNode.rotation * Math.PI / 180
@@ -400,21 +387,12 @@ cc.Class({
                 var vHorz = speed * Math.sin(angle)
                 var vVert = Math.abs(speed * Math.cos(angle))
                 this.enterState(State.STATE_STAY)
-                var maxSpeed = this.SPEED_A * this.score + this.SPEED_B / (this.LINE_LENGTH_MIN + 240)
+                var maxSpeed = Config.SPEED_A * this.score + Config.SPEED_B / (Config.LINE_LENGTH_MIN + 240)
                 player.setStayData(vVert, vHorz, maxSpeed)
             }
         }
 
         //检测主角跟障碍物的碰撞
-        for(var i = 0; i < this.enemys.length; i++)
-            if(this.enemys[i].y < -this.node.getParent().height)
-            {
-                this.enemys[i].destroy()
-                this.enemys.splice(i, 1)
-                cc.log('清除敌人')
-                break
-            }
-
         for(var i = 0; i < this.enemys.length; i++)
         {
             var player = this.playerNode.getComponent('Player')
@@ -425,23 +403,21 @@ cc.Class({
             var ret = this.enemys[i].getComponent('Enemy').checkCrash(this.playerNode.getComponent('Player'))
             if(ret.result == 0)//直接结束
             {
-                var effect = cc.instantiate(this.effectCrash)
+                var effect = cc.instantiate(this.config.effectCrash)
                 this.node.getParent().addChild(effect)
                 effect.x = player.node.x
                 effect.y = player.node.y
-                effect.getComponent('EffectCrash').gameManager = this
-                cc.audioEngine.playEffect(this.audioDead, false);
+                this.playSound('dead')
                 this.enterState(State.STATE_PREPAIR_DEAD)
             }
             else if(ret.result == -1)
                 continue
             else
             {
-                var effect = cc.instantiate(this.effectCrash)
+                var effect = cc.instantiate(this.config.effectCrash)
                 this.node.getParent().addChild(effect)
                 effect.x = player.node.x
                 effect.y = player.node.y
-                effect.getComponent('EffectCrash').gameManager = this
                 this.clearCrashFlag()
                 this.enemys[i].getComponent('Enemy').crashFlag = true
                 if(ret.result == 1)//向上

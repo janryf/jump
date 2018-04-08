@@ -78,7 +78,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 42
+        "__id__": 43
       }
     ],
     "_prefab": null,
@@ -131,6 +131,9 @@
     "_components": [
       {
         "__id__": 4
+      },
+      {
+        "__id__": 42
       }
     ],
     "_prefab": null,
@@ -183,20 +186,6 @@
     },
     "background1": null,
     "background2": null,
-    "LINE_LENGTH_MAX": 400,
-    "LINE_LENGTH_MIN": 80,
-    "LEVELS": [
-      0,
-      0,
-      200,
-      500
-    ],
-    "GRAVITY": 5500,
-    "STAY_TIME": 0.4,
-    "SPEED_A": 5,
-    "SPEED_B": 2600000,
-    "SPEED_C": 1,
-    "BOUNCE_OFF": 0,
     "playerNode": {
       "__id__": 6
     },
@@ -228,76 +217,16 @@
     "buttonRestart": {
       "__id__": 24
     },
-    "audioBk": {
-      "__uuid__": "f1431c4c-c957-489b-be29-7496ff2a76f2"
-    },
-    "audioCrash": {
-      "__uuid__": "f5798564-98ac-4ce8-8293-7e80a1c5928c"
-    },
-    "audioGameover": {
-      "__uuid__": "ba257104-d9cc-4322-9c12-d169ebfcef18"
-    },
-    "audioJump": {
-      "__uuid__": "f790c443-a7dd-46cc-9628-779c5d0ceb1c"
-    },
-    "audioPerfect": {
-      "__uuid__": "7b34b83b-5a33-4346-b4ae-2966812e5e35"
-    },
-    "audioDead": {
-      "__uuid__": "1bce2fc7-fb53-4148-a240-94659b6db45c"
-    },
-    "effectCrash": {
-      "__uuid__": "36d6d70a-659c-4723-a8d2-0cf5452fafbc"
-    },
-    "stickBend": null,
-    "enemyCloudPref": {
-      "__uuid__": "52b5d96d-507c-4ef1-82ad-8bde0a0171ca"
-    },
-    "enemyTangPref": {
-      "__uuid__": "0dd4cecf-ac56-4bee-bb54-0d720da73586"
-    },
-    "enemyRulaiPref": {
-      "__uuid__": "c4197f55-e4f2-4770-a3b8-dc07457db863"
-    },
-    "enemyHuluPref": {
-      "__uuid__": "2c7116a6-d56a-4a08-b672-7959de136ad8"
-    },
-    "bgPrefs": [
-      {
-        "__uuid__": "0fe93f62-982c-4b9c-9fb4-07d9043d15df"
-      },
-      {
-        "__uuid__": "ea6f95e1-262d-4da6-99f0-08092ad39b8b"
-      },
-      {
-        "__uuid__": "207fbbb3-e34f-4d31-9114-f811f3fabdcf"
-      },
-      {
-        "__uuid__": "c3da06e4-a568-44f5-bb51-9a1661994e4e"
-      },
-      {
-        "__uuid__": "e683a6cd-6f89-45af-9a55-35f938adfa13"
-      },
-      {
-        "__uuid__": "02f2b441-269e-4da8-a8bd-97587683a692"
-      },
-      {
-        "__uuid__": "75d24873-5342-4fa7-be32-f18b63121dd6"
-      },
-      {
-        "__uuid__": "06973112-2018-4354-8608-99c9cb0869f1"
-      }
-    ],
-    "stickPref": {
-      "__uuid__": "f6cd3b04-0317-4b8f-af66-42f742ec7641"
-    },
     "speedLineNode": {
       "__id__": 38
     },
     "enemyGroupNode": {
       "__id__": 41
     },
-    "enemys": []
+    "foregrounds": [],
+    "foregroundBuffer": 0,
+    "enemys": [],
+    "config": null
   },
   {
     "__type__": "cc.Node",
@@ -644,16 +573,8 @@
       "__id__": 6
     },
     "_enabled": true,
-    "jumpHeight": 0,
-    "jumpDuration": 0,
-    "maxMoveSpeed": 0,
-    "accel": 0,
     "vVert": 0,
     "vHorz": 6,
-    "bmouse": false,
-    "gameManagerNode": {
-      "__id__": 3
-    },
     "gameManager": null,
     "stayTimeout": 0.7,
     "jumpAudio": {
@@ -666,7 +587,8 @@
     },
     "tallNode": {
       "__id__": 10
-    }
+    },
+    "rollTimeout": 3
   },
   {
     "__type__": "cc.Animation",
@@ -1743,6 +1665,97 @@
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
     "groupIndex": 0
+  },
+  {
+    "__type__": "2d8b73LWixI2LDORcu+YIFN",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 3
+    },
+    "_enabled": true,
+    "audioBk": {
+      "__uuid__": "5d48443e-7e30-4ab3-8052-bc8d29a6d3c2"
+    },
+    "audioCrash": {
+      "__uuid__": "f5798564-98ac-4ce8-8293-7e80a1c5928c"
+    },
+    "audioGameover": {
+      "__uuid__": "ba257104-d9cc-4322-9c12-d169ebfcef18"
+    },
+    "audioJump": {
+      "__uuid__": "f790c443-a7dd-46cc-9628-779c5d0ceb1c"
+    },
+    "audioPerfect": {
+      "__uuid__": "7b34b83b-5a33-4346-b4ae-2966812e5e35"
+    },
+    "audioDead": {
+      "__uuid__": "1bce2fc7-fb53-4148-a240-94659b6db45c"
+    },
+    "effectCrash": {
+      "__uuid__": "36d6d70a-659c-4723-a8d2-0cf5452fafbc"
+    },
+    "enemyCloudPref": {
+      "__uuid__": "8789d345-cd33-468d-9150-3b21ee889f3b"
+    },
+    "enemyTangPref": {
+      "__uuid__": "0dd4cecf-ac56-4bee-bb54-0d720da73586"
+    },
+    "enemyRulaiPref": {
+      "__uuid__": "c4197f55-e4f2-4770-a3b8-dc07457db863"
+    },
+    "enemyHuluPref": {
+      "__uuid__": "2c7116a6-d56a-4a08-b672-7959de136ad8"
+    },
+    "bgPrefs": [
+      {
+        "__uuid__": "0fe93f62-982c-4b9c-9fb4-07d9043d15df"
+      },
+      {
+        "__uuid__": "ea6f95e1-262d-4da6-99f0-08092ad39b8b"
+      },
+      {
+        "__uuid__": "207fbbb3-e34f-4d31-9114-f811f3fabdcf"
+      },
+      {
+        "__uuid__": "c3da06e4-a568-44f5-bb51-9a1661994e4e"
+      },
+      {
+        "__uuid__": "e683a6cd-6f89-45af-9a55-35f938adfa13"
+      },
+      {
+        "__uuid__": "02f2b441-269e-4da8-a8bd-97587683a692"
+      },
+      {
+        "__uuid__": "75d24873-5342-4fa7-be32-f18b63121dd6"
+      },
+      {
+        "__uuid__": "06973112-2018-4354-8608-99c9cb0869f1"
+      }
+    ],
+    "stickPref": {
+      "__uuid__": "f6cd3b04-0317-4b8f-af66-42f742ec7641"
+    },
+    "forePrefs": [
+      {
+        "__uuid__": "6b3b13a7-0062-4804-9fa3-4426465a4fc4"
+      },
+      {
+        "__uuid__": "ac9b40ae-643d-44e6-94c6-cc4cf8e457fc"
+      },
+      {
+        "__uuid__": "5d6eac0e-a1de-442d-ba31-8f9e3ba39534"
+      },
+      {
+        "__uuid__": "d1c86f7f-b3ff-40db-8b00-933e8feff85a"
+      },
+      {
+        "__uuid__": "99532635-2afb-4ac0-95cd-bd958b2a9adc"
+      },
+      {
+        "__uuid__": "44bd709f-c0bc-445b-8f46-38179a2441b8"
+      }
+    ]
   },
   {
     "__type__": "cc.Canvas",
