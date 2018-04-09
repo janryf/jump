@@ -48,7 +48,7 @@
                 "width": 1133.984375
               },
               {
-                "active": 1,
+                "active": 0,
                 "children": [
                   "console",
                   "timeline"
@@ -85,7 +85,8 @@
         "timeline"
       ]
     },
-    "window-1523196841632": {}
+    "window-1523302614968": {},
+    "worker": {}
   },
   "panels": {
     "sprite-editor": {

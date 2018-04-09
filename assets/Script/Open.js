@@ -44,8 +44,7 @@ cc.Class({
         
             //发送消息通知开放数据域，生成sharedCanvas
             openDataContext.postMessage({
-                method:'showGroupRank',
-                pageIndex: 1
+                score: 0,
             });
         
             var main = function () {

@@ -44,8 +44,12 @@ export function enterState(gameManager, state)
 
         if(gameManager.wechat == 1)
         {
+            var openDataContext = wx.getOpenDataContext()
+            openDataContext.postMessage({
+             score: Math.floor(gameManager.score),
+             })
 
-            
+            /*
             var kvDataList = new Array();
             kvDataList.push({key:"highestScore",value:"12321"});
 
@@ -54,6 +58,7 @@ export function enterState(gameManager, state)
             fail:function(){console.log("失败")},
             complete:function(){console.log("完成")}
             })
+            */
         }
     }
     else if(state == STATE_MAIN_MENU)

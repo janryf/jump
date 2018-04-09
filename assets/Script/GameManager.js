@@ -75,12 +75,16 @@ cc.Class({
         buttonRestart:{
             default : null,
             type : cc.Node,
-        },//-------------------------
-
-        speedLineNode : {
+        },
+        buttonMusicOn:{
             default : null,
             type : cc.Node,
         },
+        buttonMusicOff:{
+            default : null,
+            type : cc.Node,
+        },
+        //-------------------------
         
         enemyGroupNode:{
             default : null,
@@ -90,6 +94,7 @@ cc.Class({
         foregroundBuffer : 0,
         enemys : [],
         config : null,
+        bMusic : true,
     },
     logicSpeed : 0,//游戏的逻辑速度，影响得分和背景等滚动速度
     enemyTimeout : 0,// 
@@ -112,10 +117,12 @@ cc.Class({
 
     showSpeedLine(bPlay)
     {
+        /*
         if(bPlay)
             this.speedLineNode.active = false
         else
         this.speedLineNode.active = false
+        */
     },
 
     start () 
@@ -127,7 +134,10 @@ cc.Class({
 
         this.buttonRestart.on('touchstart', this.restart.bind(this))
         this.buttonRestart.active = false
-        this.speedLineNode.active = false
+        this.buttonMusicOn.on('touchstart', this.musicOn.bind(this))
+        this.buttonMusicOn.active = true
+        this.buttonMusicOff.on('touchstart', this.musicOff.bind(this))
+        this.buttonMusicOff.active = false
         this.score = 0
         this.curLevel = 1
         this.beginChangeBK = false
@@ -146,6 +156,23 @@ cc.Class({
         this.background2.y = 192 + 2304
     },
 
+    musicOn()
+    {
+        this.bMusic = false
+        this.buttonMusicOn.active = false
+        this.buttonMusicOff.active = true
+        AudioMgr.stopBkMusic()
+    },
+
+    musicOff()
+    {
+        this.bMusic = true
+        this.buttonMusicOn.active = true
+        this.buttonMusicOff.active = false
+        if(this.getCurState() != State.STATE_MAIN_MENU)
+            this.playSound('bk')
+    },
+
     restart()
     {
         this.playSound('bk')
@@ -160,6 +187,7 @@ cc.Class({
             this.enemys[i].destroy()
         this.enemys = []
 
+        /*
         if(this.wechat == 1)
         {
            var openDataContext = wx.getOpenDataContext()
@@ -168,6 +196,7 @@ cc.Class({
             year: (new Date()).getFullYear()
             })
         }
+        */
 
         this.background1 = cc.instantiate(this.config.bgPrefs[0])
         this.background1.getComponent('ground').initData(this.config.stickPref)
@@ -195,6 +224,9 @@ cc.Class({
 
     playSound(soundStr)
     {
+        if(!this.bMusic)
+            return
+
         if(soundStr == 'bk')
             AudioMgr.playBkMusic(this.config.audioBk, true)
         else if(soundStr == 'over')
@@ -205,6 +237,8 @@ cc.Class({
             AudioMgr.playSound(this.config.audioDead)
         else if(soundStr == 'jump')
             AudioMgr.playSound(this.config.audioJump)
+        else if(soundStr == 'up')
+            AudioMgr.playSound(this.config.audioUp)
     },
 
     setLineNode(line)
@@ -257,15 +291,6 @@ cc.Class({
     update (dt) 
     {
         //cc.log(this.background1.x + " " + this.background.x)
-        if(this.wechat == 1) 
-        {
-            let openDataContext = wx.getOpenDataContext()
-            let sharedCanvas = openDataContext.canvas
-      
-            let context = canvas.getContext('2d')
-            context.drawImage(sharedCanvas, 0, 0)
-        }
-        
         if(this.logicSpeed > 0)//逻辑速度影响背景卷动和计分
         {
             this.foregroundBuffer -= this.logicSpeed

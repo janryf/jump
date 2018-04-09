@@ -185,9 +185,10 @@ cc.Class({
                     this.rushNode.active = true
                     this.gameManager.showSpeedLine(true)
                 }
-                if(this.vVert >= _maxSpeed * 0.8)
+                if(this.vVert >= _maxSpeed * 0.85)
                 {
                     this.tallNode.active = true
+                    this.gameManager.playSound('up')
                 }
                 if(this.vHorz > 0)
                     this.toward(1)

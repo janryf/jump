@@ -36,6 +36,10 @@ cc.Class({
             default: null,
             url: cc.AudioClip
         },
+        audioUp: {
+            default: null,
+            url: cc.AudioClip
+        },
 
         //其他预设
         effectCrash:{

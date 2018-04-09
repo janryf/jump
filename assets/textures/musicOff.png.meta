@@ -5,7 +5,7 @@
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "music2": {
+    "musicOff": {
       "ver": "1.0.3",
       "uuid": "bbdeca5a-9c52-4a07-b970-c22c25e96082",
       "rawTextureUuid": "d9a1e2f3-6abd-467d-a23e-468fa7e2c890",
