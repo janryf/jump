@@ -17,7 +17,7 @@ wx.onMessage(data => {
   //context.fillText("Hello World!", 55, 55)
 
   var score = 0
-  if(data.score)
+  if (data.score)
     score = data.score
 
   var kvDatalist = new Array()
@@ -27,21 +27,23 @@ wx.onMessage(data => {
       keyList: kvDatalist,
       success: function (data1) {
         console.log("成功取得历史记录")
+        //console.log(data1.data[0].KVDataList)
+        //console.log(data1.data[0].KVDataList.length)
         //console.log(data1.errMsg)
         //console.log(data1.data)
         //console.log(data1.data[0].KVDataList[0].key)
         //console.log(data1.data[0].KVDataList[0].value)
-        var record = parseInt(data1.data[0].KVDataList[0].value)
-        if(record >= score)
-        {
+        var record = 0
+        if (data1.data && data1.data.length > 0)// && data1.data[0] && data1.data[0].KVDataList && data1.data[0].KVDataList.length > 0)
+          record = parseInt(data1.data[0].KVDataList[0].value)
+        if (record >= score) {
           console.log('历史记录更大' + record)
           context.fillText(record.toString(), 105, 20)
         }
-        else
-        {
+        else {
           console.log('历史记录更小' + record)
           var kv1 = new Array();
-          kv1.push({ key: "score", value: score.toString()});
+          kv1.push({ key: "score", value: score.toString() });
 
           wx.setUserCloudStorage({
             KVDataList: kv1,
@@ -55,11 +57,11 @@ wx.onMessage(data => {
         //var img = wx.createImage()
         //img.src = data1.data[0].avatarUrl
         //img.onload = function () {
-          //context.drawImage(img, 333, 85, 50, 50)
+        //context.drawImage(img, 333, 85, 50, 50)
         //}
       },
-      fail: function () 
-      { console.log("失败取得历史记录") 
+      fail: function () {
+        console.log("失败取得历史记录")
       },
       complete: function () { console.log("完成取得历史记录") }
 
