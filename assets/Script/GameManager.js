@@ -135,7 +135,7 @@ cc.Class({
         this.buttonRestart.on('touchstart', this.restart.bind(this))
         this.buttonRestart.active = false
         this.buttonMusicOn.on('touchstart', this.musicOn.bind(this))
-        this.buttonMusicOn.active = true
+        this.buttonMusicOn.active = false
         this.buttonMusicOff.on('touchstart', this.musicOff.bind(this))
         this.buttonMusicOff.active = false
         this.score = 0
@@ -175,7 +175,7 @@ cc.Class({
 
     restart()
     {
-        this.playSound('bk')
+        //this.playSound('bk')
         this.enterState(State.STATE_NORMAL)
         var player = this.playerNode.getComponent('Player')
         player.restart()
@@ -230,7 +230,7 @@ cc.Class({
         if(soundStr == 'bk')
             AudioMgr.playBkMusic(this.config.audioBk, true)
         else if(soundStr == 'over')
-            AudioMgr.playBkMusic(this.config.audioGameover, false)
+            AudioMgr.playSound(this.config.audioGameover)
         else if(soundStr == 'crash')
             AudioMgr.playSound(this.config.audioCrash)
         else if(soundStr == 'dead')

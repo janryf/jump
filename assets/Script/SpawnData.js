@@ -53,6 +53,8 @@ var enemyGroups = [
         vSpeed : -80,
         hSpeed : -100,
         time : 1,
+    },
+    {
         name: 'cloud',
         x: 400,
         y: 350,
@@ -70,6 +72,8 @@ var enemyGroups = [
                 vSpeed : -100,
                 hSpeed : -40,
                 time : 1,
+            },
+            {
                 name: 'cloud',
                 x: -400,
                 y: 350,
@@ -91,7 +95,7 @@ var enemyGroups = [
     {
     name: 'tang',
     x: 250,
-    y: 300,
+    y: 350,
     vSpeed : -120,
     hSpeed : -100,
     time : 1,
@@ -123,15 +127,15 @@ var enemyGroups = [
         x: -450,
         y: 400,
         vSpeed : -200,
-        hSpeed : 150,
+        hSpeed : 100,
         time : 1,
      },
      {
     name: 'hulu',
-    x: -250,
+    x: -300,
     y: 300,
     vSpeed : -200,
-    hSpeed : 250,
+    hSpeed : 200,
     time : 0,
     },
     ],
@@ -193,7 +197,7 @@ var enemyGroups = [
         },
         {
             name: 'hulu',
-            x: 200,
+            x: 250,
             y: 500,
             vSpeed : -130,
             hSpeed : -110,
@@ -201,7 +205,7 @@ var enemyGroups = [
         },
         {
            name: 'hulu',
-           x: 0,
+           x: 100,
            y: 650,
            vSpeed : -100,
            hSpeed :-110,
@@ -212,7 +216,7 @@ var enemyGroups = [
     [
         {
             name: 'hulu',
-            x: 200,
+            x: 150,
             y: 350,
             vSpeed : -100,
             hSpeed : 100,
@@ -228,7 +232,7 @@ var enemyGroups = [
         },
         {
            name: 'hulu',
-           x: -200,
+           x: -150,
            y: 350,
            vSpeed : -100,
            hSpeed :-100,
@@ -310,7 +314,7 @@ var enemyGroups = [
         },
         {
             name: 'hulu',
-            x: -200,
+            x: -250,
             y: 510,
             vSpeed : -60,
             hSpeed : 80,
@@ -318,7 +322,7 @@ var enemyGroups = [
         },
         {
             name: 'hulu',
-            x: 0,
+            x: -50,
             y: 430,
             vSpeed : -60,
             hSpeed : 80,
@@ -326,7 +330,7 @@ var enemyGroups = [
         },
         {
             name: 'hulu',
-            x: 300,
+            x: 150,
             y: 350,
             vSpeed : -60,
             hSpeed : 80,
