@@ -233,7 +233,8 @@
     "foregroundBuffer": 0,
     "enemys": [],
     "config": null,
-    "bMusic": true
+    "bMusic": true,
+    "preRoleSpeed": 0
   },
   {
     "__type__": "cc.Node",
@@ -878,7 +879,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 195.74,
+      "width": 196,
       "height": 70
     },
     "_rotationX": 0,
@@ -1030,7 +1031,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 482.51,
+      "width": 483,
       "height": 80
     },
     "_rotationX": 0,

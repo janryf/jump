@@ -95,6 +95,7 @@ cc.Class({
         enemys : [],
         config : null,
         bMusic : true,
+        preRoleSpeed : 0,
     },
     logicSpeed : 0,//游戏的逻辑速度，影响得分和背景等滚动速度
     enemyTimeout : 0,// 
@@ -127,6 +128,7 @@ cc.Class({
 
     start () 
     {
+        SpawnData.checkConfig()
         this.scoreNode.getComponent(cc.Label).string = 0
         this.overScoreNode.active = false
         this.overScoreBg.active = false
@@ -311,8 +313,12 @@ cc.Class({
             this.scoreNode.getComponent(cc.Label).string = Math.floor(this.score) + '米'
             
             //刷障碍物
-            if(this.preLogicSpeed > 20 && this.logicSpeed <= 20 && this.enemyTimeout <= 0)
+            var player = this.playerNode.getComponent('Player')
+            var triggerSpeed = 2350
+            //if(this.preLogicSpeed > 20 && this.logicSpeed <= 20 && this.enemyTimeout <= 0)
+            if(this.preRoleSpeed > triggerSpeed && player.vVert <= triggerSpeed && this.enemyTimeout <= 0)
             {
+                cc.log("生成11111111111111111")
                 this.enemyTimeout = 2
                 var enemyGroup = SpawnData.getEnemy(this.score)
                 for(var i = 0; i < enemyGroup.length; i++)
@@ -327,6 +333,8 @@ cc.Class({
                         enemy = cc.instantiate(this.config.enemyRulaiPref)
                     else if(enemyInfo.name == 'hulu')
                         enemy = cc.instantiate(this.config.enemyHuluPref)
+                    else
+                        console.log('错误的障碍物名字' + enemyInfo.name)
                     this.enemyGroupNode.addChild(enemy)
                     //this.node.getParent().addChild(enemy)
                     enemy.getComponent("Enemy").setEnemyData(enemyInfo.x, enemyInfo.y + 1000, enemyInfo.vSpeed, enemyInfo.hSpeed)
@@ -334,6 +342,7 @@ cc.Class({
                 }
             }
             this.preLogicSpeed = this.logicSpeed
+            this.preRoleSpeed = player.vVert
         }
         this.enemyTimeout -= dt 
         
