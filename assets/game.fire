@@ -15,6 +15,9 @@
     "_children": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 16
       }
     ],
     "_tag": -1,
@@ -66,9 +69,6 @@
       },
       {
         "__id__": 47
-      },
-      {
-        "__id__": 16
       },
       {
         "__id__": 20
@@ -631,7 +631,7 @@
     "_name": "openNode",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 2
+      "__id__": 1
     },
     "_children": [],
     "_tag": -1,
@@ -671,8 +671,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 540,
+      "y": 960
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -879,7 +879,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 196,
+      "width": 195.74,
       "height": 70
     },
     "_rotationX": 0,
@@ -1031,7 +1031,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 483,
+      "width": 482.51,
       "height": 80
     },
     "_rotationX": 0,

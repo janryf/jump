@@ -84,6 +84,10 @@ cc.Class({
             default : null,
             type : cc.Node,
         },
+        openNode:{
+            default : null,
+            type : cc.Node,
+        },      
         //-------------------------
         
         enemyGroupNode:{

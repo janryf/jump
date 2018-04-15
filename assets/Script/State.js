@@ -36,6 +36,7 @@ export function enterState(gameManager, state)
         gameManager.overScoreBg.active = true
         gameManager.overScoreNode.getComponent(cc.Label).string = '成绩为：' + gameManager.scoreNode.getComponent(cc.Label).string
         gameManager.buttonRestart.active = true
+        gameManager.openNode.active = true
         if(gameManager.lineNode != null)
         {
             gameManager.lineNode.destroy()
@@ -46,7 +47,8 @@ export function enterState(gameManager, state)
         {
             var openDataContext = wx.getOpenDataContext()
             openDataContext.postMessage({
-             score: Math.floor(gameManager.score),
+                func: 'showRecord',
+                score: Math.floor(gameManager.score),
              })
 
             /*
@@ -94,6 +96,7 @@ export function leaveState(gameManager, state)
         gameManager.overScoreNode.active = false
         gameManager.overScoreBg.active = false
         gameManager.buttonRestart.active = false
+        gameManager.openNode.active = false
     }
     else if(state == STATE_MAIN_MENU)
     {

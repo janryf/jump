@@ -7,8 +7,8 @@
       "windowType": "dockable",
       "x": -8,
       "y": -8,
-      "width": 1936,
-      "height": 1066,
+      "width": 1620,
+      "height": 920,
       "layout": {
         "children": [
           {
@@ -18,23 +18,23 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 476.984375,
+                "height": 402.59375,
                 "type": "panel",
-                "width": 311
+                "width": 259.484375
               },
               {
                 "active": 0,
                 "children": [
                   "assets"
                 ],
-                "height": 459,
+                "height": 387.390625,
                 "type": "panel",
-                "width": 311
+                "width": 259.484375
               }
             ],
-            "height": 939,
+            "height": 793,
             "type": "dock-v",
-            "width": 311
+            "width": 259.484375
           },
           {
             "children": [
@@ -43,9 +43,9 @@
                 "children": [
                   "scene"
                 ],
-                "height": 550,
+                "height": 464.203125,
                 "type": "panel",
-                "width": 1133.984375
+                "width": 946.171875
               },
               {
                 "active": 0,
@@ -53,14 +53,14 @@
                   "console",
                   "timeline"
                 ],
-                "height": 386,
+                "height": 325.796875,
                 "type": "panel",
-                "width": 1133.984375
+                "width": 946.171875
               }
             ],
-            "height": 939,
+            "height": 793,
             "type": "dock-v",
-            "width": 1133.984375
+            "width": 946.171875
           },
           {
             "active": 0,
@@ -68,9 +68,9 @@
               "inspector",
               "node-library"
             ],
-            "height": 939,
+            "height": 793,
             "type": "panel",
-            "width": 463
+            "width": 386.3125
           }
         ],
         "type": "dock-h"
@@ -85,7 +85,7 @@
         "timeline"
       ]
     },
-    "window-1523302614968": {},
+    "window-1523780497105": {},
     "worker": {}
   },
   "panels": {

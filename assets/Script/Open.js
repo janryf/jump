@@ -44,6 +44,7 @@ cc.Class({
         
             //发送消息通知开放数据域，生成sharedCanvas
             openDataContext.postMessage({
+                func:'getPlayerInfo',
                 score: 0,
             });
         
