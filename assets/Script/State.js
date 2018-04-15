@@ -9,7 +9,6 @@ export function enterState(gameManager, state)
 {
     if(state == STATE_NORMAL)
     {
-
     }
     else if(state == STATE_PAUSE)
     {
@@ -29,13 +28,11 @@ export function enterState(gameManager, state)
     else if(state == STATE_DEAD)
     {
         gameManager.playSound('over')
+        gameManager.panelOver.active = true
+        gameManager.maskNode.active = true
         gameManager.logicSpeed = 0
         gameManager.playerNode.getComponent('Player').vHorz = 0
         gameManager.playerNode.getComponent('Player').vVert = 0
-        gameManager.overScoreNode.active = true
-        gameManager.overScoreBg.active = true
-        gameManager.overScoreNode.getComponent(cc.Label).string = '成绩为：' + gameManager.scoreNode.getComponent(cc.Label).string
-        gameManager.buttonRestart.active = true
         gameManager.openNode.active = true
         if(gameManager.lineNode != null)
         {
@@ -50,24 +47,14 @@ export function enterState(gameManager, state)
                 func: 'showRecord',
                 score: Math.floor(gameManager.score),
              })
-
-            /*
-            var kvDataList = new Array();
-            kvDataList.push({key:"highestScore",value:"12321"});
-
-            wx.setUserCloudStorage({KVDataList:kvDataList,
-            success:function(){console.log("成功")},
-            fail:function(){console.log("失败")},
-            complete:function(){console.log("完成")}
-            })
-            */
         }
     }
     else if(state == STATE_MAIN_MENU)
     {
-        gameManager.logoNode.active = true
-        gameManager.guideNode.active = true
-        gameManager.bestScoreNode.active = false
+        gameManager.panelStart.active = true
+        gameManager.panelRank.active = false
+        gameManager.panelOver.active = false
+
         gameManager.scoreNode.active = false
         gameManager.scoreBg.active = false
     }
@@ -93,15 +80,13 @@ export function leaveState(gameManager, state)
     }
     else if(state == STATE_DEAD)
     {
-        gameManager.overScoreNode.active = false
-        gameManager.overScoreBg.active = false
-        gameManager.buttonRestart.active = false
         gameManager.openNode.active = false
+        gameManager.panelOver.active = false
+        gameManager.maskNode.active = false
     }
     else if(state == STATE_MAIN_MENU)
     {
-        gameManager.logoNode.active = false
-        gameManager.guideNode.active = false
+        gameManager.panelStart.active = false
         gameManager.scoreNode.active = true
         gameManager.scoreBg.active = true
     }

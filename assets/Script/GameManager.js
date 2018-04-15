@@ -8,6 +8,7 @@ var State = require('State')
 var ground = require('ground')
 var Config = require('Config')
 var AudioMgr = require('AudioMgr')
+var PanelOver = require('PanelOver')
 
 cc.Class({
     extends: cc.Component,
@@ -52,30 +53,15 @@ cc.Class({
             default : null,
             type : cc.Node,
         },
-        overScoreBg : {
+        panelStart : {
             default : null,
             type : cc.Node,
         },
-        overScoreNode : {
+        panelOver : {
             default : null,
             type : cc.Node,
         },
-        bestScoreNode : {
-            default : null,
-            type : cc.Node,
-        },
-        logoNode : {
-            default : null,
-            type : cc.Node,
-        },
-        guideNode : {
-            default : null,
-            type : cc.Node,
-        },
-        buttonRestart:{
-            default : null,
-            type : cc.Node,
-        },
+
         buttonMusicOn:{
             default : null,
             type : cc.Node,
@@ -84,10 +70,14 @@ cc.Class({
             default : null,
             type : cc.Node,
         },
-        openNode:{
+        maskNode:{
             default : null,
             type : cc.Node,
-        },      
+        },  
+        panelRank:{
+            default : null,
+            type : cc.Node,
+        },  
         //-------------------------
         
         enemyGroupNode:{
@@ -120,6 +110,11 @@ cc.Class({
         this.config = this.getComponent('Config')
     },
 
+    showPanelRank()
+    {
+        this.panelRank.active = true
+    },
+
     showSpeedLine(bPlay)
     {
         /*
@@ -134,16 +129,14 @@ cc.Class({
     {
         SpawnData.checkConfig()
         this.scoreNode.getComponent(cc.Label).string = 0
-        this.overScoreNode.active = false
-        this.overScoreBg.active = false
+        this.maskNode.active = false
         //cc.audioEngine.playEffect(this.backgroundAudio, true);
 
-        this.buttonRestart.on('touchstart', this.restart.bind(this))
-        this.buttonRestart.active = false
         this.buttonMusicOn.on('touchstart', this.musicOn.bind(this))
         this.buttonMusicOn.active = false
         this.buttonMusicOff.on('touchstart', this.musicOff.bind(this))
         this.buttonMusicOff.active = false
+
         this.score = 0
         this.curLevel = 1
         this.beginChangeBK = false
@@ -192,6 +185,11 @@ cc.Class({
         for(var i = 0; i < this.enemys.length; i++)
             this.enemys[i].destroy()
         this.enemys = []
+        for(var i = 0; i < this.foregrounds.length; i++)
+            this.foregrounds[i].destroy()
+        this.foregrounds = []
+        this.background1.destroy()
+        this.background2.destroy()
 
         /*
         if(this.wechat == 1)
