@@ -90,6 +90,7 @@ cc.Class({
         config : null,
         bMusic : true,
         preRoleSpeed : 0,
+        life : 1,
     },
     logicSpeed : 0,//游戏的逻辑速度，影响得分和背景等滚动速度
     enemyTimeout : 0,// 
@@ -141,6 +142,7 @@ cc.Class({
         this.curLevel = 1
         this.beginChangeBK = false
         this.enemyTimeout = 2
+        this.life = 1
         this.enterState(State.STATE_MAIN_MENU)
 
         this.background1 = cc.instantiate(this.config.bgPrefs[0])
@@ -180,6 +182,7 @@ cc.Class({
         player.restart()
         this.score = 0
         this.curLevel = 1
+        this.life = 1
         this.beginChangeBK = false
         this.scoreNode.getComponent(cc.Label).string = 0 + '米'
         for(var i = 0; i < this.enemys.length; i++)

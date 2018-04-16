@@ -18,23 +18,23 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 490.734375,
+                "height": 477.71875,
                 "type": "panel",
-                "width": 300.15625
+                "width": 310.25
               },
               {
                 "active": 0,
                 "children": [
                   "assets"
                 ],
-                "height": 471.265625,
+                "height": 458.265625,
                 "type": "panel",
-                "width": 300.15625
+                "width": 310.25
               }
             ],
-            "height": 965,
+            "height": 939,
             "type": "dock-v",
-            "width": 300.15625
+            "width": 310.25
           },
           {
             "children": [
@@ -43,9 +43,9 @@
                 "children": [
                   "scene"
                 ],
-                "height": 673.40625,
+                "height": 654.8125,
                 "type": "panel",
-                "width": 1097.484375
+                "width": 1135.5
               },
               {
                 "active": 0,
@@ -53,14 +53,14 @@
                   "console",
                   "timeline"
                 ],
-                "height": 288.59375,
+                "height": 281.1875,
                 "type": "panel",
-                "width": 1097.484375
+                "width": 1135.5
               }
             ],
-            "height": 965,
+            "height": 939,
             "type": "dock-v",
-            "width": 1097.484375
+            "width": 1135.5
           },
           {
             "active": 0,
@@ -68,9 +68,9 @@
               "inspector",
               "node-library"
             ],
-            "height": 965,
+            "height": 939,
             "type": "panel",
-            "width": 447.34375
+            "width": 462.265625
           }
         ],
         "type": "dock-h"
@@ -85,7 +85,7 @@
         "timeline"
       ]
     },
-    "window-1523812329010": {}
+    "window-1523899060743": {}
   },
   "panels": {
     "sprite-editor": {

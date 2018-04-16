@@ -47,6 +47,14 @@ cc.Class({
     {
         this.node.active = false
         this.gameManager.openNode.active = false
+        if(this.gameManager.wechat == 1)
+        {
+            var openDataContext = wx.getOpenDataContext()
+            openDataContext.postMessage({
+                func: 'showRecord',
+                score: Math.floor(this.gameManager.score),
+             })
+        }
     },
 
     onPrev()

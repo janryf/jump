@@ -1,7 +1,65 @@
 ﻿var playerID1 = null
 var playerID2 = null
-var list = null
+var rankList = null
 var curPage = 0
+var NUMBER_IN_PAGE = 2
+
+function drawRank() {
+  let sharedCanvas = wx.getSharedCanvas()
+  let width = sharedCanvas.width
+  let height = sharedCanvas.height
+  let context = sharedCanvas.getContext('2d')
+  context.clearRect(0, 0, sharedCanvas.width, sharedCanvas.height)
+  context.fillStyle = 'white'
+  context.font = "18px Arial";
+
+  for (var i = curPage * NUMBER_IN_PAGE; i < (curPage + 1) * NUMBER_IN_PAGE && i < rankList.length; i++) {
+    let avatar = rankList[i].avatarUrl
+    let nick = rankList[i].nickname
+    let userScore = 0
+    for (var j = 0; j < rankList[i].KVDataList.length; j++) {
+      var kv = rankList[i].KVDataList
+      if (kv[j].key == 'score') {
+        userScore = parseInt(kv[j].value)
+        break
+      }
+    }
+    //context.fillText(data1.data[0].KVDataList[0].value, 105, 25)
+    let img = wx.createImage()
+    img.src = avatar
+    let posY = height / 5 + width / 8 * (i - curPage * NUMBER_IN_PAGE)
+    context.fillText((i + 1).toString(), width / 4.6, posY + width / 16)
+    context.fillText(nick, width / 2.6, posY + width / 16)
+    context.fillText(userScore.toString() + '米', width / 1.5, posY + width / 16)
+
+    console.log(posY)
+    img.onload = function () {
+      console.log("画" + nick)
+      context.drawImage(img, width / 3.6, posY, width / 10, width / 10)
+    }
+  }
+}
+
+function sortRecord(a, b)
+{
+  let userScoreA = 0
+  for (var j = 0; j < a.KVDataList.length; j++) {
+    var kv = a.KVDataList
+    if (kv[j].key == 'score') {
+      userScoreA = parseInt(kv[j].value)
+      break
+    }
+  }
+  let userScoreB = 0
+  for (var j = 0; j < b.KVDataList.length; j++) {
+    var kv = b.KVDataList
+    if (kv[j].key == 'score') {
+      userScoreB = parseInt(kv[j].value)
+      break
+    }
+  }
+  return userScoreB - userScoreA
+}
 
 wx.onMessage(data => {
   if (data.func == 'getPlayerInfo') {
@@ -88,69 +146,37 @@ wx.onMessage(data => {
       })
   }
   else if (data.func == 'showRank') {
-    //page
     let sharedCanvas = wx.getSharedCanvas()
-    let width = sharedCanvas.width
-    let height = sharedCanvas.height
-    console.log('分辨率：' + sharedCanvas.width + " " + sharedCanvas.height)
     let context = sharedCanvas.getContext('2d')
     context.clearRect(0, 0, sharedCanvas.width, sharedCanvas.height)
-    context.fillStyle = 'white'
-    context.font = "15px Arial";
-
-    if(data.page == 'init')
-    {
+    console.log('子项' + data.page)
+    if (data.page == 'init') {
       curPage = 0
       var kvDatalist = new Array()
       kvDatalist.push('score')
       wx.getFriendCloudStorage({
         keyList: kvDatalist,
-        success: function (data1) 
-        {
+        success: function (data1) {
           console.log("成功取得历史记录")
           console.log(data1.data)
-          list = data1.data
-
-          for(var i = 0; i < 2 && i < list.length; i++)
-          {
-            let avatar = list[i].avatarUrl
-            let nick = list[i].nickname
-            console.log(nick)
-            let userScore = 0
-            for(var j = 0; j < list[i].KVDataList.length; j++)
-            {
-              var kv = list[i].KVDataList
-              if(kv[j].key == 'score')
-              {
-                userScore = parseInt(kv[j].value)
-                break
-              }
-            }
-          //context.fillText(data1.data[0].KVDataList[0].value, 105, 25)
-            let img = wx.createImage()
-            img.src = avatar
-            let posY = height / 3 + 85 * i
-            console.log(posY)
-            img.onload = function () 
-            {
-              console.log("画" + nick)
-              console.log(posY)
-              context.drawImage(img, width / 2, posY, width / 10, width / 10)
-            }
-          }
+          rankList = data1.data
+          rankList.sort(sortRecord)
+          drawRank()
         }
       })
 
     }
-    else if(data.page == 'prev')
-    {
-
+    else if (data.page == 'prev') {
+      console.log("上一页")
+      if (curPage > 0)
+        curPage--
+      drawRank()
     }
-    else if(data.page == 'next')
-    {
-
+    else if (data.page == 'next') {
+      console.log("下一页")
+      if ((curPage + 1) * NUMBER_IN_PAGE < rankList.length)
+        curPage++
+      drawRank()
     }
-
-
   }
 })
