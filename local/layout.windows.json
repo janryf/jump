@@ -18,23 +18,23 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 477.71875,
+                "height": 478,
                 "type": "panel",
-                "width": 310.25
+                "width": 310
               },
               {
                 "active": 0,
                 "children": [
                   "assets"
                 ],
-                "height": 458.265625,
+                "height": 458,
                 "type": "panel",
-                "width": 310.25
+                "width": 310
               }
             ],
             "height": 939,
             "type": "dock-v",
-            "width": 310.25
+            "width": 310
           },
           {
             "children": [
@@ -43,9 +43,9 @@
                 "children": [
                   "scene"
                 ],
-                "height": 654.8125,
+                "height": 654.984375,
                 "type": "panel",
-                "width": 1135.5
+                "width": 1135.984375
               },
               {
                 "active": 0,
@@ -53,14 +53,14 @@
                   "console",
                   "timeline"
                 ],
-                "height": 281.1875,
+                "height": 281,
                 "type": "panel",
-                "width": 1135.5
+                "width": 1135.984375
               }
             ],
             "height": 939,
             "type": "dock-v",
-            "width": 1135.5
+            "width": 1135.984375
           },
           {
             "active": 0,
@@ -70,7 +70,7 @@
             ],
             "height": 939,
             "type": "panel",
-            "width": 462.265625
+            "width": 462
           }
         ],
         "type": "dock-h"
@@ -85,7 +85,8 @@
         "timeline"
       ]
     },
-    "window-1523899060743": {}
+    "window-1523984905830": {},
+    "worker": {}
   },
   "panels": {
     "sprite-editor": {
@@ -125,8 +126,8 @@
       "height": 574
     },
     "timeline.event": {
-      "x": 592,
-      "y": 206,
+      "x": 911,
+      "y": 200,
       "width": 416,
       "height": 438
     }

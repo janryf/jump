@@ -2,7 +2,7 @@
 var playerID2 = null
 var rankList = null
 var curPage = 0
-var NUMBER_IN_PAGE = 2
+var NUMBER_IN_PAGE = 7
 
 function drawRank() {
   let sharedCanvas = wx.getSharedCanvas()

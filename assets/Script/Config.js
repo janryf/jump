@@ -28,10 +28,6 @@ cc.Class({
             default: null,
             url: cc.AudioClip
         },
-        audioPerfect: {
-            default: null,
-            url: cc.AudioClip
-        },
         audioDead: {
             default: null,
             url: cc.AudioClip

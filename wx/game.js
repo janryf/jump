@@ -6,6 +6,7 @@ wxDownloader.REMOTE_SERVER_ROOT = "";
 require('src/settings');
 require('main');
 
+wx.showShareMenu()
 wx.login({
   success : function(res)
   {

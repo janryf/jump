@@ -174,6 +174,18 @@ cc.Class({
             this.playSound('bk')
     },
 
+    continueGame()
+    {
+        this.enterState(State.STATE_NORMAL)
+        this.playerNode.x = 0
+        this.playerNode.y = 0
+        for(var i = 0; i < this.enemys.length; i++)
+            this.enemys[i].destroy()
+        this.enemys = []
+        this.playerNode.getComponent('Player').restart()
+        this.playerNode.getComponent('Player').vVert = 1500
+    },
+
     restart()
     {
         //this.playSound('bk')
@@ -193,17 +205,6 @@ cc.Class({
         this.foregrounds = []
         this.background1.destroy()
         this.background2.destroy()
-
-        /*
-        if(this.wechat == 1)
-        {
-           var openDataContext = wx.getOpenDataContext()
-           openDataContext.postMessage({
-            text: 'hello',
-            year: (new Date()).getFullYear()
-            })
-        }
-        */
 
         this.background1 = cc.instantiate(this.config.bgPrefs[0])
         this.background1.getComponent('ground').initData(this.config.stickPref)
