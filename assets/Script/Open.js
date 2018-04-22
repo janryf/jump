@@ -32,11 +32,13 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () 
+    {
+        this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
+    },
 
     start () {
 
-        this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
         if(this.gameManager.wechat == 1)
         {
             var openDataContext = wx.getOpenDataContext();

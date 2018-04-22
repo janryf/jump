@@ -48,12 +48,14 @@ cc.Class({
         if(this.gameManager.wechat == 1)
         {
             wx.shareAppMessage({
+                title: '一个筋斗云，十万八千里，不服来战！',
+                imageUrl: "res/raw-assets/textures/share.png",
                 success:function()
                 {
                     console.log('成功分享')
                     this.gameManager.life = 0
                     this.gameManager.continueGame()
-                },
+                }.bind(this),
                 fail:function()
                 {
                     console.log('失败分享')

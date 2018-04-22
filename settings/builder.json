@@ -3,6 +3,7 @@
   "appSecret": "",
   "encryptJs": true,
   "excludeScenes": [],
+  "fb-instant-games": {},
   "includeAnySDK": false,
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
@@ -20,12 +21,15 @@
   },
   "packageName": "org.cocos2d.start_project",
   "privateKey": "",
+  "qqplay": {
+    "orientation": "portrait"
+  },
   "renderMode": "1",
   "startScene": "e82bccb4-0880-45f1-a2f5-6f5cf17ef49f",
   "title": "jump",
   "webOrientation": "auto",
   "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
+    "appid": "wx5232ce36001f14be",
     "orientation": "portrait"
   },
   "xxteaKey": "e4301e0a-b7c2-43",

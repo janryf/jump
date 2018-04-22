@@ -59,7 +59,7 @@ cc.Class({
         var angle = this.node.rotation * Math.PI / 180
         var left = playerNode.x - 40
         var right = playerNode.x + 40
-        var top = playerNode.y - playerNode.height / 2
+        var top = playerNode.y - playerNode.height / 3
         var down = playerNode.y - playerNode.height
 
         //cc.log(playerNode.x + "主角位置" + left + " " + right + " " + top + " " + down)
