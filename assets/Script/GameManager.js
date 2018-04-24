@@ -131,6 +131,7 @@ cc.Class({
         SpawnData.checkConfig()
         this.scoreNode.getComponent(cc.Label).string = 0
         this.maskNode.active = false
+        this.openNode.active = true
         //cc.audioEngine.playEffect(this.backgroundAudio, true);
 
         this.buttonMusicOn.on('touchstart', this.musicOn.bind(this))

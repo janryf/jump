@@ -2,7 +2,7 @@
   "androidStudio": true,
   "apiLevel": "",
   "appABIs": [],
-  "buildPath": "D:\\jump_pro\\i",
+  "buildPath": "build",
   "debug": false,
   "includeEruda": false,
   "keystoreAlias": "",

@@ -38,7 +38,6 @@ cc.Class({
     },
 
     start () {
-
         if(this.gameManager.wechat == 1)
         {
             var openDataContext = wx.getOpenDataContext();
