@@ -37,6 +37,10 @@ cc.Class({
         if(this.gameManager.getCurState() != State.STATE_NORMAL && this.gameManager.getCurState() != State.STATE_MAIN_MENU)
             return
 
+        var curPos = event.getLocation()
+        if(curPos.y >= this.gameManager.node.getParent().height / 2)
+            return
+
         if(this.gameManager.getCurState() == State.STATE_MAIN_MENU)
         {
             this.gameManager.playSound('bk')
@@ -65,6 +69,8 @@ cc.Class({
         if(this.gameManager.getCurState() != State.STATE_NORMAL && this.gameManager.getCurState() != State.STATE_MAIN_MENU)
             return
         var opos = event.getLocation()
+        if(opos.y >= this.gameManager.node.getParent().height / 2)
+            return
         var pos = cc.p(opos.x, opos.y)
         //向量差计算,结束点-开始点，向量的指向是朝着结束点  
         var posSub = pos.sub(this.startPos);  

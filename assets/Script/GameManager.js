@@ -184,7 +184,9 @@ cc.Class({
             this.enemys[i].destroy()
         this.enemys = []
         this.playerNode.getComponent('Player').restart()
-        this.playerNode.getComponent('Player').vVert = 1500
+        this.playerNode.getComponent('Player').vVert = 4000
+        this.playSound('up')
+        this.playerNode.getComponent('Player').rushNode.active = true
     },
 
     restart()
